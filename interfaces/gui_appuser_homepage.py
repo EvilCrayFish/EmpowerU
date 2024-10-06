@@ -11,9 +11,9 @@ import tkinter as tk
 from interfaces.gui_community_page import CommunityPage
 
 
-class HomePage(tk.Frame):
+class AppUserHomePage(tk.Frame):
 
-    def __init__(self, master, receptionist_user):
+    def __init__(self, master, app_user):
         """
         Constructor for the ReceptionistMenu
 
@@ -25,9 +25,9 @@ class HomePage(tk.Frame):
         """
         super().__init__(master=master)
         self.master = master
-        self.receptionist_user = receptionist_user
+        self.receptionist_user = app_user
 
-        self.welcome_label = tk.Label(self, text=f"Welcome in, {receptionist_user.first_name}!")
+        self.welcome_label = tk.Label(self, text=f"Welcome in, {app_user.first_name}!")
         self.welcome_label.pack(padx=10, pady=10)
 
         self.label1 = tk.Label(self, text="Choose one of the following:")

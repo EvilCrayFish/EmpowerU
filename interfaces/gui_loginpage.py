@@ -7,8 +7,12 @@ import tkinter as tk
 
 # Local application imports
 #TODO Define new page classes and change these imports
-from app.app_receptionist import ReceptionistUser
-from interfaces.gui_receptionist_menu import ReceptionistMenu
+from classes.cls_app_user import AppUser
+from classes.cls_mentor import Mentor
+
+from interfaces.gui_appuser_homepage import AppUserHomePage
+from interfaces.gui_teacher_homepage import TeacherHomePage
+
 
 class LoginPage(tk.Frame):
 
@@ -82,13 +86,20 @@ class LoginPage(tk.Frame):
         (None)
         """
 
-        receptionist_user = ReceptionistUser.authenticate(self.username_var.get(), self.password_var.get())
-        # Checks if receptionist_user is an instance of the ReceptionistUser class (i.e. authentication is successful)
+        app_user = AppUser.authenticate(self.username_var.get(), self.password_var.get())
+        mentor = Mentor.authenticate(self.username_var.get(), self.password_var.get())
+        # Checks if receptionist_user is an instance of the User class (i.e. authentication is successful)
         # https://docs.python.org/3/library/functions.html#isinstance
-        if isinstance(receptionist_user, ReceptionistUser):
+        if isinstance(app_user, AppUser):
             self.master.hide_loginpage()
-            self.receptionist_menu = ReceptionistMenu(self.master, receptionist_user)
-            self.receptionist_menu.show_menu()
+            self.app_user_home_page = AppUserHomePage(self.master, app_user)
+            self.app_user_home_page.show_menu()
+
+        elif isinstance(mentor, Mentor):
+            self.master.hide_loginpage()
+            self.teacher_home_page = TeacherHomePage(self.master, mentor)
+            self.teacher_home_page.show_menu()
+
 
         else:
             self.alert_var.set("Login Unsuccessful.")

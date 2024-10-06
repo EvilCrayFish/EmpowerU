@@ -1,4 +1,4 @@
-from cls_staff import Staff
+from classes.cls_staff import Staff
 
 class Teacher(Staff):
     def __init__(self, staff_id: int, name: str, email: str, phone: int, role: str, fname: str, lname: str):

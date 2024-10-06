@@ -18,9 +18,9 @@ def main():
     Returns:
     (None)
     """
-    root = EmpowerU(title="Music School Management System", width=720, height=480)
+    root = EmpowerU(title="EmpowerU", width=720, height=480)
     root.mainloop()
-    print("MSMS proper shutdown completed.")
+    print("EmpowerU proper shutdown completed.")
 
 
 if __name__ == "__main__":
