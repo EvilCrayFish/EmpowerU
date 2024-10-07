@@ -52,12 +52,74 @@ class AppUser(User):
         self.password = password
         self.import_all_data()
 
-    def import_data():
+    def import_all_data(self):
         """
         Imports all relevant data about a user including their progress within the courses.
         
         """
         pass
+
+
+    def get_name(self):
+        """
+        Returns the user's full name.
+        """
+        return f"{self._fname} {self._lname}"
+    
+    def update_password(self, new_password: str):
+        """
+        Turns the new password into a salted hash and passes to the database. 
+
+        Arguments:
+        new_password - plaintext string of the new password to set the user's password to
+
+        Returns:
+        A boolean value of whether the new pasword is set or not
+        """
+        pass
+
+    @staticmethod
+    def login(self, username, password):
+        """
+        Checks the input username and password against the username and password associated with the user. 
+
+        Arguments:
+        username - the username of the user attempting to log in
+        password - the plaintext password of the user attempting to log in
+
+        Returns:
+        A boolean of whether the login was successful or not
+        """
+        pass
+
+    def update_lesson_progress(self, course, progress):
+        """
+        Updates lesson progress, idk how yet
+
+        Arguments:
+        course - the area where progress was made
+        progress - the amount of progress made
+        """
+        pass
+
+    def get_lesson_progress(self, course):
+        """
+        Checks the amount of progress made in a course and returns the % amount
+
+        Arguments: 
+        course - which course is being reported on
+
+        Returns:
+        An integer of the amount of progress the user has made in that course
+        """
+        pass
+
+    def make_post(self):
+        """
+        This is very underdeveloped but the idea is it compiles the post and then returns it for another object to actually store it
+        """
+        pass
+    
 
 if __name__ == "__main__":
     pass

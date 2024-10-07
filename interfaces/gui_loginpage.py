@@ -10,8 +10,7 @@ import tkinter as tk
 from classes.cls_app_user import AppUser
 from classes.cls_mentor import Mentor
 
-from interfaces.gui_appuser_homepage import AppUserHomePage
-from interfaces.gui_teacher_homepage import TeacherHomePage
+from interfaces.gui_homepage import HomePage
 
 
 class LoginPage(tk.Frame):
@@ -91,20 +90,23 @@ class LoginPage(tk.Frame):
         # Checks if receptionist_user is an instance of the User class (i.e. authentication is successful)
         # https://docs.python.org/3/library/functions.html#isinstance
         if isinstance(app_user, AppUser):
+            user = app_user
             self.master.hide_loginpage()
-            self.app_user_home_page = AppUserHomePage(self.master, app_user)
+            self.app_user_home_page = HomePage(self.master, user)
             self.app_user_home_page.show_menu()
-
+            self.alert_var.set("")
         elif isinstance(mentor, Mentor):
+            user = mentor
             self.master.hide_loginpage()
-            self.teacher_home_page = TeacherHomePage(self.master, mentor)
-            self.teacher_home_page.show_menu()
-
-
+            self.app_user_home_page = HomePage(self.master, user)
+            self.app_user_home_page.show_menu()
+            self.alert_var.set("")
         else:
             self.alert_var.set("Login Unsuccessful.")
+        
         self.password_var.set("")
         self.username_var.set("")
+
         
 		
 
