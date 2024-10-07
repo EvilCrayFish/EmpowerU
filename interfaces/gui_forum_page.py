@@ -33,6 +33,20 @@ class ForumPage(tk.Frame):
         self.login_title = tk.Label(master=self.titleframe, text="EMPOWERU", font=("Arial Bold", 30))
         self.login_title.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W)
 
+        # New label for "Python Course Forum"
+        self.course_label = tk.Label(master=self.titleframe, text="Python Course Forum", font=("Arial", 10))
+        self.course_label.grid(row=0, column=2, padx=10, pady=(10, 10), sticky=tk.W)  # Adjust pady to position it below the title
+
+        # Home button to return to the homepage
+        self.home_button = tk.Button(master=self.titleframe, text="Home", command=self.return_to_menu)
+        self.home_button.grid(row=0, column=3, padx=10, pady=10, sticky=tk.E)  # Sticks to the right side of column 3
+
+        # Make the titleframe expand and occupy available space
+        self.titleframe.grid_columnconfigure(0, weight=0)  # Allow column 0 to expand
+        self.titleframe.grid_columnconfigure(1, weight=0)  # Allow column 1 to expand
+        self.titleframe.grid_columnconfigure(2, weight=1)  # Allow column 2 to expand
+        self.titleframe.grid_columnconfigure(3, weight=0)  # Column 3 for the Home button should not expand
+
         # Bottom left Frame (postframe)
         self.postframe = tk.Frame(self, bd=5, relief="groove", width=200)
         self.postframe.grid(row=1, column=0, sticky="nsew")
@@ -41,6 +55,7 @@ class ForumPage(tk.Frame):
         self.search_var = tk.StringVar()
         self.search_entry = tk.Entry(master=self.postframe, textvariable=self.search_var, width=30)
         self.search_entry.grid(row=0, column=0, padx=10, pady=10)
+        self.search_entry.bind("<Return>", lambda event: self.search_button.invoke())  # Bind the 'Return' key to search button
 
         self.search_button = tk.Button(master=self.postframe, text="Search", command=self.search_posts)
         self.search_button.grid(row=0, column=1, padx=10, pady=10)
@@ -61,10 +76,13 @@ class ForumPage(tk.Frame):
         self.posts = self.load_posts()
         self.create_scrollable_posts()
 
-    def create_scrollable_posts(self):
+    def create_scrollable_posts(self, posts=None):
         """
         Create scrollable buttons representing posts in the postframe.
         """
+        if posts is None:
+            posts = self.posts
+
         for widget in self.postframe.winfo_children():
             if widget not in [self.search_entry, self.search_button]:
                 widget.destroy()
@@ -81,12 +99,13 @@ class ForumPage(tk.Frame):
         button_frame = tk.Frame(canvas)
         canvas.create_window((0, 0), window=button_frame, anchor='nw')
 
-        for idx, post in enumerate(self.posts):
+        for idx, post in enumerate(posts):
             title_display = post.title if len(post.title) <= 30 else post.title[:27] + "..."
             button_text = f"{title_display}\nAuthor: {post.user}"
-            post_button = tk.Button(button_frame, text=button_text, width=40, relief="groove", anchor='w',
+            post_button = tk.Button(button_frame, text=button_text, width=35, relief="groove", anchor='w',  # Width changed to 35
                                     font=("Arial", 10, "bold"), command=lambda p=post: self.view_post(p))
             post_button.grid(row=idx, column=0, padx=5, pady=5, sticky=tk.W)
+
 
     def load_posts(self):
         posts = []
@@ -140,12 +159,14 @@ class ForumPage(tk.Frame):
         text_label.pack(anchor="nw", pady=10, padx=10)
 
         # Code block (restored functionality, 10px padding on the left)
-        if post.code:
-            code_frame = tk.Frame(self.post_window, bg="black", width=760)
-            code_frame.pack(anchor="nw", padx=10, pady=(0, 20))
-            code_label = tk.Label(code_frame, text=post.code, font=("Courier", 10), fg="white", bg="black", padx=10, pady=10, width=95)
-            code_label.pack(anchor="nw")
 
+        if post.code:
+            code_frame = tk.Frame(self.post_window, bg="black")
+            code_frame.pack(fill=tk.X, padx=10, pady=(0, 20))  # Fill the full width of the post window
+
+            # Adjust the code label to be left-aligned within the frame
+            code_label = tk.Label(code_frame, text=post.code, font=("Courier", 10), fg="white", bg="black", padx=10, pady=10, anchor="nw")
+            code_label.pack(anchor="nw", fill=tk.X)  # Make the label fill the frame
         # Display Comments
         self.display_comments(post)
 
@@ -195,7 +216,12 @@ class ForumPage(tk.Frame):
         Filter posts based on a search term entered by the user. Only display posts where the search term is found in the title.
         """
         search_term = self.search_var.get().lower()
-        matching_posts = [post for post in self.posts if search_term in post.title.lower()]
+
+        # If the search term is empty, show all posts
+        if not search_term:
+            matching_posts = self.posts
+        else:
+            matching_posts = [post for post in self.posts if search_term in post.title.lower()]
 
         # Clear only the post buttons (keep the search bar intact)
         for widget in self.postframe.winfo_children():
@@ -203,8 +229,8 @@ class ForumPage(tk.Frame):
                 widget.destroy()
 
         # Display only matching posts
-        self.posts = matching_posts
-        self.create_scrollable_posts()
+        self.create_scrollable_posts(matching_posts)
+
 
     def return_to_menu(self):
         """
