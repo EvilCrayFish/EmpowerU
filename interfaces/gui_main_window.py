@@ -25,6 +25,7 @@ class EmpowerU(tk.Tk):
 
         #TODO Change Image
         self.loginpage = LoginPage(master=self, image_path="./images/logo.png")
+        self.loginpage.pack(fill="both", expand=True)
         self.show_loginpage()
 
     def show_loginpage(self):
