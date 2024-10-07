@@ -25,7 +25,7 @@ class Teacher(Staff):
         A boolean value of whether the new pasword is set or not
         """
         pass
-
+    
     @staticmethod
     def login(self, username, password) -> Union[Teacher, None]:
         """

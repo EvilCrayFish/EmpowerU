@@ -22,7 +22,7 @@ class HomePage(tk.Frame):
 
         Parameter(s):
         - master: master widget of this widget instance
-        - receptionist_user: an instance of the ReceptionistUser class
+        - user: an instance of the ReceptionistUser class
                              representing the receptionist that has 
                              successfully logged in
         """
@@ -53,6 +53,7 @@ class HomePage(tk.Frame):
             self.logout_btn.pack(padx=10, pady=10)
         
         else: #Teacher Homepage
+            #TODO Navigation for Teacher
             self.welcome_label = tk.Label(self, text=f"Welcome in TEACHER, {user.first_name}!")
             self.welcome_label.pack(padx=10, pady=10)
 
@@ -75,7 +76,7 @@ class HomePage(tk.Frame):
         """
         Method to handle the search teachers functionality upon button click.
         """
-        progress_page = ProgressTracker(self.master, self, self.receptionist_user)
+        progress_page = ProgressTracker(self.master, self, self.user)
         progress_page.place(relx=.5, rely=.5, anchor=tk.CENTER)
         self.hide_menu()
         
@@ -83,7 +84,7 @@ class HomePage(tk.Frame):
         """
         Method to handle the search teachers functionality upon button click.
         """
-        courses_page = CoursesPage(self.master, self, self.receptionist_user)
+        courses_page = CoursesPage(self.master, self, self.user)
         courses_page.place(relx=.5, rely=.5, anchor=tk.CENTER)
         self.hide_menu()
 
@@ -92,7 +93,7 @@ class HomePage(tk.Frame):
         """
         Method to handle the search teachers functionality upon button click.
         """
-        #search_teachers = SearchTeachers(self.master, self, self.receptionist_user)
+        #search_teachers = SearchTeachers(self.master, self, self.user)
         #search_teachers.place(relx=.5, rely=.5, anchor=tk.CENTER)
         self.hide_menu()
 
@@ -100,7 +101,7 @@ class HomePage(tk.Frame):
         """
         Method to handle the search teachers functionality upon button click.
         """
-        forum_page = ForumPage(self.master, self, self.receptionist_user)
+        forum_page = ForumPage(self.master, self, self.user)
         forum_page.place(relx=.5, rely=.5, anchor=tk.CENTER)
         self.hide_menu()
 
