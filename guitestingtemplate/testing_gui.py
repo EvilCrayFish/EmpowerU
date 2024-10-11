@@ -19,7 +19,7 @@ class Page(tk.Tk):
         super().title(title)
         super().geometry(f"{width}x{height}")
 
-        self.page = Layout(master=self)
+        self.page = Layout(master=self,homepage=any, app_user=any)
         self.show_page()
 
     def show_page(self):
