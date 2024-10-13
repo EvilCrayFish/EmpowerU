@@ -1,0 +1,2 @@
+08/01/2024, 20:55, Michael Scott
+Try using tracemalloc – it tracks memory allocations in Python and is super helpful for identifying leaks.

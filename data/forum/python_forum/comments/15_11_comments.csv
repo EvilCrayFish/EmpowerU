@@ -1,0 +1,2 @@
+08/01/2024, 21:05, Dwight Schrute
+You should also look into memory_profiler. It can show you how much memory each line of your code uses.

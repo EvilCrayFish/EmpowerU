@@ -1,0 +1,2 @@
+08/01/2024, 21:35, Oscar Martinez
+I recommend running your code through valgrind. It's a bit advanced, but great for catching low-level memory issues.

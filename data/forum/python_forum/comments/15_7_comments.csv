@@ -1,0 +1,2 @@
+08/01/2024, 21:15, Pam Beesly
+Be cautious with caching or keeping large objects in lists or dictionaries longer than necessary.
