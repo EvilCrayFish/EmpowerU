@@ -34,7 +34,7 @@ class Post:
 
         # Iterate through files in the directory
         for filename in os.listdir(comment_dir):
-            if filename.startswith(f"{self.id}_") and filename.endswith("_comment.csv"):
+            if filename.startswith(f"{self.id}_") and filename.endswith("_comments.csv"):
                 # Construct the full path to the comment file
                 file_path = os.path.join(comment_dir, filename)
 
