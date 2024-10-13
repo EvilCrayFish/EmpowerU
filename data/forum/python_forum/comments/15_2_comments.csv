@@ -1,0 +1,2 @@
+08/01/2024, 21:15, Michael Brooks
+Try using tools like memory_profiler and objgraph to monitor your program’s memory usage. They can help you track down the objects that are taking up too much memory.

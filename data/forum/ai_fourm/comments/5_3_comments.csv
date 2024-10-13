@@ -1,0 +1,2 @@
+08/05/2024, 13:00, Rachel Adams
+A common example is using a pre-trained convolutional neural network (CNN) for image recognition. You can freeze the early layers that have learned general features and only retrain the last layers on your specific dataset.

@@ -1,0 +1,2 @@
+What is transfer learning in AI?,08/05/2024,11:50,Sara Ali
+I’ve heard that transfer learning can save time when training models. How does it work exactly?

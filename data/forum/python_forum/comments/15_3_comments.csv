@@ -1,0 +1,2 @@
+08/01/2024, 21:35, Olivia Ford
+Check for circular references or global variables that aren’t being released. Sometimes memory leaks happen when objects are still referenced even though they’re no longer needed.

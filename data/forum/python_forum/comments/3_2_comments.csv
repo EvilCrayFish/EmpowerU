@@ -1,0 +1,2 @@
+08/01/2024, 12:05, Ryan Evans
+Have you tried using vectorized operations in numpy instead of loops? They’re way faster for numerical data.

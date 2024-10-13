@@ -1,0 +1,2 @@
+08/03/2024, 16:45, Megan Johnson
+I recommend using unittest.mock for unit tests so you don’t rely on external services during development. For integration tests, you could use a separate environment with the real APIs.

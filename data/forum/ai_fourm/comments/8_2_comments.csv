@@ -1,0 +1,2 @@
+08/05/2024, 14:35, Daniel Green
+You can recognize overfitting by comparing the training accuracy with validation accuracy. If there’s a large gap where the training accuracy is high, but validation accuracy is low, that’s a sign of overfitting.

@@ -1,0 +1,2 @@
+08/05/2024, 14:30, Jason Smith
+Pooling layers are often used between convolutions to reduce the dimensionality of the data, making the network more efficient while retaining important information.

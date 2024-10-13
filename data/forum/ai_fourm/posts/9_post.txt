@@ -1,0 +1,2 @@
+How is AI used in natural language processing (NLP)?,08/05/2024,14:20,Emily Chen
+I’m curious about how AI powers things like language translation and chatbots. Can someone explain NLP?

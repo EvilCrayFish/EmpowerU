@@ -1,0 +1,2 @@
+08/05/2024, 11:40, Michael Carter
+First, you need a dataset that contains both the input and the desired output (for supervised learning). Then, you split the data into training and testing sets. The model is trained on the training set and validated on the test set.

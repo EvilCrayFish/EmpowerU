@@ -1,0 +1,2 @@
+How does a convolutional neural network (CNN) work?,08/05/2024,13:10,Nina Davis
+I’m trying to learn about CNNs, but I’m confused about how they process images. Can someone explain?

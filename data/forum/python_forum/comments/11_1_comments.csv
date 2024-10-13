@@ -1,0 +1,2 @@
+08/01/2024, 18:10, Emma Roberts
+You can use Python’s built-in json module. Load the JSON file using json.load() or a JSON string with json.loads(). It will convert the JSON data into a Python dictionary.

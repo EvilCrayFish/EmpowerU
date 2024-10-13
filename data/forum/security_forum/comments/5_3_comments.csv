@@ -1,0 +1,2 @@
+10/10/2024, 11:50, Jacob Turner
+I’d suggest using RBAC along with regular audits to ensure no one’s permissions have been accidentally expanded beyond their role. It’s a great way to keep everything secure.

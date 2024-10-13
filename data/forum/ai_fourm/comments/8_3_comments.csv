@@ -1,0 +1,2 @@
+08/05/2024, 15:00, Laura Walker
+To prevent overfitting, you can try regularization techniques like dropout, early stopping, or reducing the complexity of your model by simplifying the architecture.

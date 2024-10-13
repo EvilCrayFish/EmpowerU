@@ -1,0 +1,2 @@
+08/01/2024, 18:30, Mark Phillips
+Once parsed, you can access specific data by treating the JSON object like a dictionary. For example, data["key"] will give you the value associated with "key".

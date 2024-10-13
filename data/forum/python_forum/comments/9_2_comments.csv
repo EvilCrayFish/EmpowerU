@@ -1,0 +1,2 @@
+08/01/2024, 17:10, Sarah Brown
+Make sure you're working in a virtual environment before installing third-party libraries. Use python -m venv <env_name> to create one, then activate it.

@@ -1,0 +1,2 @@
+08/05/2024, 13:50, Rachel Clark
+ReLU is used in most hidden layers, while Softmax is often used in the output layer for classification tasks, especially when you need probabilities across multiple classes.

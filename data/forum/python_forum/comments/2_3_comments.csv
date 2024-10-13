@@ -1,0 +1,2 @@
+07/02/2024, 10:45, David Adams
+Don’t forget about hashing passwords! Use libraries like bcrypt to ensure password security.

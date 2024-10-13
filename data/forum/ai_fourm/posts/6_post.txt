@@ -1,0 +1,2 @@
+What are the most common activation functions in neural networks?,08/05/2024,12:30,John Patel
+I’ve come across terms like ReLU and Sigmoid, but I don’t fully understand what activation functions do in neural networks.

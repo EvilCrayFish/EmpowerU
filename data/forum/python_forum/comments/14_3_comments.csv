@@ -1,0 +1,2 @@
+08/01/2024, 20:35, Mark Thompson
+For really large datasets, you might also want to consider using numpy arrays or pandas for better performance. They offer vectorized operations that are significantly faster than either list comprehensions or loops.

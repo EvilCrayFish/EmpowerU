@@ -1,0 +1,2 @@
+08/05/2024, 13:00, Sarah White
+Activation functions decide whether a neuron should be activated or not, helping the network learn complex patterns. ReLU (Rectified Linear Unit) is the most commonly used one because it helps avoid the vanishing gradient problem during training.

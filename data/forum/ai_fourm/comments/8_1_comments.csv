@@ -1,0 +1,2 @@
+08/05/2024, 14:10, Olivia James
+Overfitting happens when your model performs very well on the training data but poorly on unseen test data. It means the model has learned the noise in the training data instead of general patterns.

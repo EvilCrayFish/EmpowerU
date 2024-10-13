@@ -1,0 +1,2 @@
+08/05/2024, 12:05, Emily Green
+During training, the model adjusts its internal parameters (weights) to minimize a loss function, which measures how far off the predictions are from the actual values. This process is repeated over many iterations!

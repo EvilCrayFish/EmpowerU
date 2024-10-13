@@ -1,0 +1,2 @@
+08/05/2024, 13:35, Michael Adams
+A CNN processes images by applying filters (or kernels) that slide over the image to detect features like edges, textures, and shapes. These filters are learned during training.

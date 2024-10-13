@@ -1,0 +1,2 @@
+08/01/2024, 16:05, Jake Nelson
+Make sure all the packages you're using are compatible with Python 3.12. Try running pip list --outdated and update anything that might be causing conflicts.

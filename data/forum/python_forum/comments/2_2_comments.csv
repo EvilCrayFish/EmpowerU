@@ -1,0 +1,2 @@
+07/02/2024, 09:25, Emily Johnson
+You should also consider using environment variables for storing sensitive data like API keys instead of hardcoding them.

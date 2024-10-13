@@ -1,0 +1,2 @@
+08/05/2024, 13:25, David Brown
+Sigmoid and Tanh are also popular, but they tend to saturate at extremes (close to 0 or 1), which can slow down learning. ReLU is more efficient for deep networks

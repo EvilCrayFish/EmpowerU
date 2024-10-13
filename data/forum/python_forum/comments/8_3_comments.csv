@@ -1,0 +1,2 @@
+08/03/2024, 17:50, Olivia Harris
+For a balance between unit and integration testing, I use VCR.py to record real API interactions and replay them in tests. It reduces API calls and avoids rate limit issues.

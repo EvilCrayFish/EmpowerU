@@ -1,0 +1,2 @@
+08/01/2024, 17:35, James Cooper
+If the library isn’t available on PyPI, you can install it directly from a GitHub repository using pip install git+<repository_url>.

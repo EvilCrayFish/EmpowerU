@@ -1,0 +1,2 @@
+08/03/2024, 18:30, Megan Lee
+For simple plots, Matplotlib is great, but Seaborn is better for more aesthetically pleasing statistical plots. Seaborn is built on top of Matplotlib, so it can handle simple plots just as well.

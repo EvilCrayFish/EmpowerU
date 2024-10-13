@@ -1,0 +1,2 @@
+08/03/2024, 17:20, Daniel Clark
+responses is a good option for mocking HTTP requests in unit tests. It makes it easy to simulate API responses without hitting real endpoints.

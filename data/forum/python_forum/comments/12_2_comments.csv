@@ -1,0 +1,2 @@
+08/03/2024, 19:20, Claire Adams
+For real-time visualization, I’d recommend using Plotly or Bokeh. Both are good with large datasets, but Plotly has better community support and more resources. Seaborn and Matplotlib are more suited for static charts.

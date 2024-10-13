@@ -1,0 +1,2 @@
+08/01/2024, 16:45, Emily Davis
+Are you using any libraries that rely on C extensions? Those can sometimes break with version upgrades. You might need to recompile or find alternatives.
