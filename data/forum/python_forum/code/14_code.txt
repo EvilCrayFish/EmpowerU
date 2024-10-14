@@ -1,0 +1,19 @@
+import time
+
+# Example with a large dataset
+large_dataset = list(range(10**6))
+
+# Using a for loop
+start_time = time.time()
+squared_numbers = []
+for num in large_dataset:
+    squared_numbers.append(num ** 2)
+loop_duration = time.time() - start_time
+
+# Using a list comprehension
+start_time = time.time()
+squared_numbers_comp = [num ** 2 for num in large_dataset]
+comp_duration = time.time() - start_time
+
+print(f"For loop duration: {loop_duration:.5f} seconds")
+print(f"List comprehension duration: {comp_duration:.5f} seconds")
