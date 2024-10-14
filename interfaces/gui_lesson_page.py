@@ -20,7 +20,7 @@ class LessonPage(tk.Frame):
         self.title_label = tk.Label(self, text=f"{self.course_name} - {self.lesson_name}", font=("Arial Bold", 24))
         self.title_label.grid(row=0, column=0, padx=20, pady=20)
 
-        # Lesson content 
+        # Lesson content --> display generated content from data (.txt)
         self.content_label = tk.Label(self, text="Lesson content goes here", font=("Arial", 14))
         self.content_label.grid(row=1, column=0, padx=20, pady=20)
 

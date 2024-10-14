@@ -21,6 +21,7 @@ class CoursesPage(tk.Frame):
         self.master = master
         self.homepage = homepage
         self.app_user = app_user
+        self.image_path = "./images/logo.png"
 
         self.grid(row=0, column=0, sticky="nsew")
 
@@ -30,6 +31,10 @@ class CoursesPage(tk.Frame):
         self.titleframe.grid_columnconfigure(0, weight=0)
         self.titleframe.grid_columnconfigure(1, weight=0)
         self.titleframe.grid_columnconfigure(2, weight=0)
+        
+        self.logo_photoimage = tk.PhotoImage(master=self, file=self.image_path)
+        self.logo_label = tk.Label(master=self.titleframe, image=self.logo_photoimage, width=128, height=128)
+        self.logo_label.grid(row=0, column=0, sticky=tk.W, padx=10, pady=10)
 
         self.login_title = tk.Label(master=self.titleframe, text="EMPOWERU", font=("Arial Bold", 30))
         self.login_title.grid(row=0, column=1, sticky=tk.W)

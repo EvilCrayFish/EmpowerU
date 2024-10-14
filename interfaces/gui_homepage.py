@@ -63,10 +63,10 @@ class HomePage(tk.Frame):
         Create navigation buttons for AppUser.
         """
         self.courses_btn = self.create_styled_button("Courses", command=self.show_courses_page)
-        self.courses_btn.grid(row=2, column=0, pady=10, sticky="ew")
+        self.courses_btn.grid(row=3, column=0, pady=10, sticky="ew")
 
         self.forum_btn = self.create_styled_button("Forum", command=self.show_forum_page)
-        self.forum_btn.grid(row=3, column=0, pady=10, sticky="ew")
+        self.forum_btn.grid(row=3, column=1, pady=10, sticky="ew")
 
         self.progress_tracker_btn = self.create_styled_button(
             "Progress Tracker", command=self.show_progress_tracker
@@ -78,15 +78,15 @@ class HomePage(tk.Frame):
         Create navigation buttons for Mentor.
         """
         self.register_btn = self.create_styled_button("Register a Student")
-        self.register_btn.grid(row=2, column=0, pady=10, sticky="ew")
+        self.register_btn.grid(row=3, column=0, pady=10, sticky="ew")
 
         self.search_btn = self.create_styled_button(
             "Search Teachers by Instrument", command=self.show_search_teachers_frame
         )
-        self.search_btn.grid(row=3, column=0, pady=10, sticky="ew")
+        self.search_btn.grid(row=4, column=0, pady=10, sticky="ew")
 
         self.class_btn = self.create_styled_button("Create Scheduled Class")
-        self.class_btn.grid(row=4, column=0, pady=10, sticky="ew")
+        self.class_btn.grid(row=5, column=0, pady=10, sticky="ew")
 
     def create_styled_button(self, text, command=None):
         """
