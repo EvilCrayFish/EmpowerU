@@ -35,27 +35,27 @@ class ForumPage(tk.Frame):
 
         # New label for "Python Course Forum"
         self.course_label = tk.Label(master=self.titleframe, text="Python Course Forum", font=("Arial", 10))
-        self.course_label.grid(row=0, column=2, padx=10, pady=(10, 10), sticky=tk.W)  # Adjust pady to position it below the title
+        self.course_label.grid(row=0, column=2, padx=10, pady=(10, 10), sticky=tk.W)
 
         # Home button to return to the homepage
         self.home_button = tk.Button(master=self.titleframe, text="Home", command=self.return_to_menu)
-        self.home_button.grid(row=0, column=3, padx=10, pady=10, sticky=tk.E)  # Sticks to the right side of column 3
+        self.home_button.grid(row=0, column=3, padx=10, pady=10, sticky=tk.E)
 
         # Make the titleframe expand and occupy available space
-        self.titleframe.grid_columnconfigure(0, weight=0)  # Allow column 0 to expand
-        self.titleframe.grid_columnconfigure(1, weight=0)  # Allow column 1 to expand
-        self.titleframe.grid_columnconfigure(2, weight=1)  # Allow column 2 to expand
-        self.titleframe.grid_columnconfigure(3, weight=0)  # Column 3 for the Home button should not expand
+        self.titleframe.grid_columnconfigure(0, weight=0)  
+        self.titleframe.grid_columnconfigure(1, weight=0)
+        self.titleframe.grid_columnconfigure(2, weight=1)  
+        self.titleframe.grid_columnconfigure(3, weight=0)  
 
-        # Bottom left Frame (postframe)
+        # Bottom left Frame (postframe) for listing posts
         self.postframe = tk.Frame(self, bd=5, relief="groove", width=200)
         self.postframe.grid(row=1, column=0, sticky="nsew")
 
-        # Search bar (fixed so it doesn't disappear on search)
+        # Search bar
         self.search_var = tk.StringVar()
         self.search_entry = tk.Entry(master=self.postframe, textvariable=self.search_var, width=30)
         self.search_entry.grid(row=0, column=0, padx=10, pady=10)
-        self.search_entry.bind("<Return>", lambda event: self.search_button.invoke())  # Bind the 'Return' key to search button
+        self.search_entry.bind("<Return>", lambda event: self.search_button.invoke())
 
         self.search_button = tk.Button(master=self.postframe, text="Search", command=self.search_posts)
         self.search_button.grid(row=0, column=1, padx=10, pady=10)
@@ -64,15 +64,18 @@ class ForumPage(tk.Frame):
         self.post_canvas = tk.Canvas(self, bd=5, relief="groove", width=800, height=600)
         self.post_canvas.grid(row=1, column=1, sticky="nsew")
 
+        # Right scrollbar for the post window
         self.post_scrollbar = tk.Scrollbar(self, orient="vertical", command=self.post_canvas.yview)
         self.post_scrollbar.grid(row=1, column=2, sticky="ns")
 
         self.post_canvas.configure(yscrollcommand=self.post_scrollbar.set)
 
+        # Create post_window inside the canvas for post content
         self.post_window = tk.Frame(self.post_canvas)
         self.post_canvas.create_window((0, 0), window=self.post_window, anchor="nw", width=800)
         self.post_window.bind("<Configure>", lambda e: self.post_canvas.configure(scrollregion=self.post_canvas.bbox("all")))
 
+        # Load posts and create the list
         self.posts = self.load_posts()
         self.create_scrollable_posts()
 
@@ -83,29 +86,36 @@ class ForumPage(tk.Frame):
         if posts is None:
             posts = self.posts
 
+        # Clear existing content in the postframe except search widgets
         for widget in self.postframe.winfo_children():
             if widget not in [self.search_entry, self.search_button]:
                 widget.destroy()
 
-        canvas = tk.Canvas(self.postframe, width=200, height=400)
-        canvas.grid(row=1, column=0, sticky=tk.NW)
+        # Create a canvas for scrolling the posts
+        self.post_canvas_list = tk.Canvas(self.postframe, width=200, height=400)
+        self.post_canvas_list.grid(row=1, column=0, sticky=tk.NW)
 
-        scrollbar = tk.Scrollbar(self.postframe, orient="vertical", command=canvas.yview)
-        scrollbar.grid(row=1, column=1, sticky=tk.NS)
+        # Create a frame inside the canvas where post buttons will be placed
+        self.button_frame = tk.Frame(self.post_canvas_list)
+        self.post_canvas_list.create_window((0, 0), window=self.button_frame, anchor='nw')
 
-        canvas.configure(yscrollcommand=scrollbar.set)
-        canvas.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
-
-        button_frame = tk.Frame(canvas)
-        canvas.create_window((0, 0), window=button_frame, anchor='nw')
-
+        # Create post buttons inside button_frame
         for idx, post in enumerate(posts):
             title_display = post.title if len(post.title) <= 30 else post.title[:27] + "..."
             button_text = f"{title_display}\nAuthor: {post.user}"
-            post_button = tk.Button(button_frame, text=button_text, width=35, relief="groove", anchor='w',  # Width changed to 35
+            post_button = tk.Button(self.button_frame, text=button_text, width=35, relief="groove", anchor='w',
                                     font=("Arial", 10, "bold"), command=lambda p=post: self.view_post(p))
             post_button.grid(row=idx, column=0, padx=5, pady=5, sticky=tk.W)
 
+        # Set up scrollbar for the post list
+        self.scrollbar_list = tk.Scrollbar(self.postframe, orient="vertical", command=self.post_canvas_list.yview)
+        self.scrollbar_list.grid(row=1, column=1, sticky=tk.NS)
+
+        # Configure canvas to use the scrollbar
+        self.post_canvas_list.configure(yscrollcommand=self.scrollbar_list.set)
+
+        # Bind canvas resizing to update its scrollable region
+        self.button_frame.bind("<Configure>", lambda event: self.post_canvas_list.configure(scrollregion=self.post_canvas_list.bbox("all")))
 
     def load_posts(self):
         posts = []
@@ -137,6 +147,7 @@ class ForumPage(tk.Frame):
         """
         View the selected post in the post_window (which is scrollable).
         """
+        # Clear previous post content
         for widget in self.post_window.winfo_children():
             widget.destroy()
 
@@ -159,16 +170,20 @@ class ForumPage(tk.Frame):
         text_label.pack(anchor="nw", pady=10, padx=10)
 
         # Code block (restored functionality, 10px padding on the left)
-
         if post.code:
             code_frame = tk.Frame(self.post_window, bg="black")
-            code_frame.pack(fill=tk.X, padx=10, pady=(0, 20))  # Fill the full width of the post window
+            code_frame.pack(fill=tk.X, padx=10, pady=(0, 20))
 
-            # Adjust the code label to be left-aligned within the frame
             code_label = tk.Label(code_frame, text=post.code, font=("Courier", 10), fg="white", bg="black", padx=10, pady=10, anchor="nw")
-            code_label.pack(anchor="nw", fill=tk.X)  # Make the label fill the frame
+            code_label.pack(anchor="nw", fill=tk.X)
+
         # Display Comments
         self.display_comments(post)
+
+        # Update the scroll region for post content
+        self.post_canvas.update_idletasks()
+        self.post_canvas.configure(scrollregion=self.post_canvas.bbox("all"))
+
 
     def display_comments(self, post):
         """
@@ -189,6 +204,19 @@ class ForumPage(tk.Frame):
             wrapped_comment = self.wrap_text(comment.text, 140)
             comment_label = tk.Label(self.post_window, text=wrapped_comment, font=("Arial", 10), anchor="nw", justify="left")
             comment_label.pack(anchor="nw", padx=50, pady=(0, 20))
+
+            # Display code associated with the comment (if available)
+            comment_code = comment.load_code()
+            if comment_code:
+                code_frame = tk.Frame(self.post_window, bg="black")
+                code_frame.pack(fill=tk.X, padx=50, pady=(0, 20))
+
+                code_label = tk.Label(code_frame, text=comment_code, font=("Courier", 10), fg="white", bg="black", padx=10, pady=10, anchor="nw")
+                code_label.pack(anchor="nw", fill=tk.X)
+
+        # Update the scroll region after adding all comments
+        self.post_canvas.update_idletasks()
+        self.post_canvas.configure(scrollregion=self.post_canvas.bbox("all"))
 
     def wrap_text(self, text, line_length):
         """
@@ -223,14 +251,8 @@ class ForumPage(tk.Frame):
         else:
             matching_posts = [post for post in self.posts if search_term in post.title.lower()]
 
-        # Clear only the post buttons (keep the search bar intact)
-        for widget in self.postframe.winfo_children():
-            if widget not in [self.search_entry, self.search_button]:
-                widget.destroy()
-
-        # Display only matching posts
+        # Create new scrollable posts based on the search result
         self.create_scrollable_posts(matching_posts)
-
 
     def return_to_menu(self):
         """
