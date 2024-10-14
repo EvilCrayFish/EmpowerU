@@ -24,19 +24,17 @@ class Layout(tk.Frame):
         self.master = master
         self.homepage = homepage
         self.app_user = app_user
-        self.image_path = "./images/logo.png"
 
         self.grid(row=0, column=0, sticky="nsew")
-        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=0)
         self.grid_rowconfigure(0, weight=0)
 
         # Top Frame (titleframe)
         self.titleframe = tk.Frame(self, bd=5, relief="groove", width=1280)
         self.titleframe.grid(row=0, column=0, sticky="nsew", columnspan=2)
-
-        self.logo_photoimage = tk.PhotoImage(master=self, file=self.image_path)
-        self.logo_label = tk.Label(master=self.titleframe, image=self.logo_photoimage, width=128, height=128)
-        self.logo_label.grid(row=0, column=0, sticky=tk.W, padx=10, pady=10)
+        self.titleframe.grid_columnconfigure(0, weight=0)
+        self.titleframe.grid_columnconfigure(1, weight=0)
+        self.titleframe.grid_columnconfigure(2, weight=1)
 
         self.login_title = tk.Label(master=self.titleframe, text="EMPOWERU", font=("Arial Bold", 30))
         self.login_title.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W)
@@ -49,10 +47,10 @@ class Layout(tk.Frame):
         self.home_button.grid(row=0, column=3, padx=10, pady=10, sticky=tk.E)  # Sticks to the right side of column 3
 
         # Make the titleframe expand and occupy available space
-        self.grid_columnconfigure(1, weight=1)
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_rowconfigure(1, weight=1)
-        self.grid_rowconfigure(2, weight=10)  #notebook
+        self.grid_columnconfigure(0, weight=0)
+        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure(1, weight=0)
+        self.grid_rowconfigure(2, weight=1)  #notebook
         
         #Courses notebook
         courses_notebook = ttk.Notebook(self)
@@ -81,29 +79,51 @@ class Layout(tk.Frame):
         self.homepage.place(relx=.5, rely=.5, anchor=tk.CENTER)
 
     def PY_tab_content(self):
-        tk.Label(self.PY_tab, text="Python Programming", font=('Arial', 14)).grid(row=0, column=0, pady=10)
-        tk.Label(self.PY_tab, text="Mentor: James V", font=('Arial', 12)).grid(row=1, column=0, pady=10)
+        self.create_course_label(self.PY_tab, "Python Programming", "James V")
 
         # Lesson modules
-        tk.Button(self.PY_tab, text="Lesson 1", font=('Arial', 14)).grid(row=2, column=0, pady=10)
-        tk.Button(self.PY_tab, text="Lesson 2", font=('Arial', 14)).grid(row=3, column=0, pady=10)
-        tk.Button(self.PY_tab, text="Lesson 3", font=('Arial', 14)).grid(row=4, column=0, pady=10)
+        tk.Button(self.PY_tab, text="Lesson 1", font=('Arial', 14), 
+                  command=lambda: self.open_lesson("Python Programming", "Lesson 1")).grid(row=2, column=0, pady=10, padx=10)
+        tk.Button(self.PY_tab, text="Lesson 2", font=('Arial', 14)).grid(row=2, column=1, padx=10,  pady=10)
+        tk.Button(self.PY_tab, text="Lesson 3", font=('Arial', 14)).grid(row=2, column=2, padx=10,  pady=10)
 
     def AI_tab_content(self):
-        tk.Label(self.AI_tab, text="Artificial Intelligence", font=('Arial', 14)).grid(row=0, column=0, pady=10)
-        tk.Label(self.AI_tab, text="Mentor: James V", font=('Arial', 12)).grid(row=1, column=0, pady=10)
+        self.create_course_label(self.AI_tab, "Artificial Intelligence", "James V")
 
         tk.Button(self.AI_tab, text="Lesson 1", font=('Arial', 14)).grid(row=2, column=0, pady=10)
-        tk.Button(self.AI_tab, text="Lesson 2", font=('Arial', 14)).grid(row=3, column=0, pady=10)
-        tk.Button(self.AI_tab, text="Lesson 3", font=('Arial', 14)).grid(row=4, column=0, pady=10)
+        tk.Button(self.AI_tab, text="Lesson 2", font=('Arial', 14)).grid(row=2, column=1, padx=10, pady=10)
+        tk.Button(self.AI_tab, text="Lesson 3", font=('Arial', 14)).grid(row=2, column=2, padx=10, pady=10)
 
     def IS_tab_content(self):
-        tk.Label(self.IS_tab, text="Information Security", font=('Arial', 14)).grid(row=0, column=0, pady=10)
-        tk.Label(self.IS_tab, text="Mentor: James V", font=('Arial', 12)).grid(row=1, column=0, pady=10)
+        self.create_course_label(self.IS_tab, "Information Security", "James V")
 
         tk.Button(self.IS_tab, text="Lesson 1", font=('Arial', 14)).grid(row=2, column=0, pady=10)
-        tk.Button(self.IS_tab, text="Lesson 2", font=('Arial', 14)).grid(row=3, column=0, pady=10)
-        tk.Button(self.IS_tab, text="Lesson 3", font=('Arial', 14)).grid(row=4, column=0, pady=10)
+        tk.Button(self.IS_tab, text="Lesson 2", font=('Arial', 14)).grid(row=2, column=1, padx=10, pady=10)
+        tk.Button(self.IS_tab, text="Lesson 3", font=('Arial', 14)).grid(row=2, column=2, padx=10, pady=10)
+
+    def create_course_label(self, parent, course_name, mentor_name):
+        """
+        Creates a course label and mentor label in the specified parent frame.
+
+        Parameters:
+        - parent: The parent frame in which the labels will be placed.
+        - course_name: The name of the course.
+        - mentor_name: The name of the mentor for the course.
+        """
+        tk.Label(parent, text=course_name, font=('Arial', 14)).grid(row=0, column=0, pady=10)
+        tk.Label(parent, text=f"Mentor: {mentor_name}", font=('Arial', 12)).grid(row=1, column=0, pady=10)
+
+    def open_lesson(self, course_name, lesson_name):
+        """
+        Opens the lesson page for the given course and lesson.
+
+        Parameters:
+        - course_name: The name of the course.
+        - lesson_name: The name of the lesson.
+        """
+        lesson_page = LessonPage(self.master, course_name, lesson_name, self)
+        self.grid_forget()  # Hide the current course page
+        lesson_page.grid(row=0, column=0, sticky="nsew")  # Show the lesson page
 
 if __name__ == "__main__":
     # DO NOT MODIFY

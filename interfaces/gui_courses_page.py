@@ -2,6 +2,7 @@
 # Third party imports
 import tkinter as tk
 from tkinter import ttk
+from gui_lesson_page import LessonPage
 
 class CoursesPage(tk.Frame):
     def __init__(self, master, homepage, app_user):
@@ -19,10 +20,9 @@ class CoursesPage(tk.Frame):
         self.master = master
         self.homepage = homepage
         self.app_user = app_user
-        self.image_path = "./images/logo.png"
 
         self.grid(row=0, column=0, sticky="nsew")
-        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=0)
         self.grid_rowconfigure(0, weight=0)
 
         # Top Frame (titleframe)
@@ -31,10 +31,6 @@ class CoursesPage(tk.Frame):
         self.titleframe.grid_columnconfigure(0, weight=0)
         self.titleframe.grid_columnconfigure(1, weight=0)
         self.titleframe.grid_columnconfigure(2, weight=1)
-
-        self.logo_photoimage = tk.PhotoImage(master=self, file=self.image_path)
-        self.logo_label = tk.Label(master=self.titleframe, image=self.logo_photoimage, width=128, height=128)
-        self.logo_label.grid(row=0, column=0, sticky=tk.W, padx=10, pady=10)
 
         self.login_title = tk.Label(master=self.titleframe, text="EMPOWERU", font=("Arial Bold", 30))
         self.login_title.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W)
@@ -79,30 +75,36 @@ class CoursesPage(tk.Frame):
         self.homepage.place(relx=.5, rely=.5, anchor=tk.CENTER)
 
     def PY_tab_content(self):
-        tk.Label(self.PY_tab, text="Python Programming", font=('Arial', 14)).grid(row=0, column=0, pady=10)
-        tk.Label(self.PY_tab, text="Mentor: James V", font=('Arial', 12)).grid(row=1, column=0, pady=10)
+        self.create_course_label(self.PY_tab, "Python Programming", "James V")
 
         # Lesson modules
-        tk.Button(self.PY_tab, text="Lesson 1", font=('Arial', 14)).grid(row=2, column=0, pady=10)
+        tk.Button(self.PY_tab, text="Lesson 1", font=('Arial', 14), 
+                  command=lambda: self.open_lesson("Python Programming", "Lesson 1")).grid(row=2, column=0, pady=10, padx=10)
         tk.Button(self.PY_tab, text="Lesson 2", font=('Arial', 14)).grid(row=2, column=1, padx=10,  pady=10)
         tk.Button(self.PY_tab, text="Lesson 3", font=('Arial', 14)).grid(row=2, column=2, padx=10,  pady=10)
 
     def AI_tab_content(self):
-        tk.Label(self.AI_tab, text="Artificial Intelligence", font=('Arial', 14)).grid(row=0, column=0, pady=10)
-        tk.Label(self.AI_tab, text="Mentor: James V", font=('Arial', 12)).grid(row=1, column=0, pady=10)
+        self.create_course_label(self.AI_tab, "Artificial Intelligence", "James V")
 
         tk.Button(self.AI_tab, text="Lesson 1", font=('Arial', 14)).grid(row=2, column=0, pady=10)
         tk.Button(self.AI_tab, text="Lesson 2", font=('Arial', 14)).grid(row=2, column=1, padx=10, pady=10)
         tk.Button(self.AI_tab, text="Lesson 3", font=('Arial', 14)).grid(row=2, column=2, padx=10, pady=10)
 
     def IS_tab_content(self):
-        tk.Label(self.IS_tab, text="Information Security", font=('Arial', 14)).grid(row=0, column=0, pady=10)
-        tk.Label(self.IS_tab, text="Mentor: James V", font=('Arial', 12)).grid(row=1, column=0, pady=10)
+        self.create_course_label(self.IS_tab, "Information Security", "James V")
 
         tk.Button(self.IS_tab, text="Lesson 1", font=('Arial', 14)).grid(row=2, column=0, pady=10)
         tk.Button(self.IS_tab, text="Lesson 2", font=('Arial', 14)).grid(row=2, column=1, padx=10, pady=10)
         tk.Button(self.IS_tab, text="Lesson 3", font=('Arial', 14)).grid(row=2, column=2, padx=10, pady=10)
 
+    def create_course_label(self, parent, course_name, mentor_name):
+        tk.Label(parent, text=course_name, font=('Arial', 14)).grid(row=0, column=0, pady=10)
+        tk.Label(parent, text=f"Mentor: {mentor_name}", font=('Arial', 12)).grid(row=1, column=0, pady=10)
+
+    def open_lesson(self, course_name, lesson_name):
+        lesson_page = self.LessonPage(self.master, course_name, lesson_name, self)
+        self.grid_forget() 
+        lesson_page.grid(row=0, column=0, sticky="nsew")
 
 if __name__ == "__main__":
     # DO NOT MODIFY
