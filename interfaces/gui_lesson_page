@@ -1,7 +1,11 @@
+"""
+Contains class definition for the LessonPage window
+"""
 
 # Third party imports
 import tkinter as tk
 from tkinter import ttk
+import os
 
 class LessonPage(tk.Frame):
     def __init__(self, master, course_name, lesson_name, homepage, app_user):

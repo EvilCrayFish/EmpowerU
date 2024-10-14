@@ -2,7 +2,9 @@
 # Third party imports
 import tkinter as tk
 from tkinter import ttk
-from gui_lesson_page import LessonPage
+import os
+from interfaces.gui_lesson_page import LessonPage
+
 
 class CoursesPage(tk.Frame):
     def __init__(self, master, homepage, app_user):
@@ -30,7 +32,7 @@ class CoursesPage(tk.Frame):
         self.titleframe.grid(row=0, column=0, sticky="nsew", columnspan=2)
         self.titleframe.grid_columnconfigure(0, weight=0)
         self.titleframe.grid_columnconfigure(1, weight=0)
-        self.titleframe.grid_columnconfigure(2, weight=1)
+        self.titleframe.grid_columnconfigure(2, weight=0)
 
         self.login_title = tk.Label(master=self.titleframe, text="EMPOWERU", font=("Arial Bold", 30))
         self.login_title.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W)
