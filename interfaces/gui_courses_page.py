@@ -2,7 +2,6 @@
 # Third party imports
 import tkinter as tk
 from tkinter import ttk
-import os
 from interfaces.gui_lesson_page import LessonPage
 
 
@@ -24,8 +23,6 @@ class CoursesPage(tk.Frame):
         self.app_user = app_user
 
         self.grid(row=0, column=0, sticky="nsew")
-        self.grid_columnconfigure(0, weight=0)
-        self.grid_rowconfigure(0, weight=0)
 
         # Top Frame (titleframe)
         self.titleframe = tk.Frame(self, bd=5, relief="groove", width=1280)
@@ -35,14 +32,14 @@ class CoursesPage(tk.Frame):
         self.titleframe.grid_columnconfigure(2, weight=0)
 
         self.login_title = tk.Label(master=self.titleframe, text="EMPOWERU", font=("Arial Bold", 30))
-        self.login_title.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W)
+        self.login_title.grid(row=0, column=1, sticky=tk.W)
     
         self.course_label = tk.Label(master=self.titleframe, text="Courses Page", font=("Arial", 10))
         self.course_label.grid(row=0, column=2, padx=10, pady=(10, 10), sticky=tk.W)  # Adjust pady to position it below the title
         
         # Home button to return to the homepage
         self.home_button = tk.Button(master=self.titleframe, text="Home", command=self.return_to_menu)
-        self.home_button.grid(row=0, column=3, padx=10, pady=10, sticky=tk.E)  # Sticks to the right side of column 3
+        self.home_button.grid(row=0, column=3, padx=10, pady=10, sticky=tk.E)
 
         # Make the titleframe expand and occupy available space
         self.grid_columnconfigure(0, weight=0)
@@ -65,16 +62,12 @@ class CoursesPage(tk.Frame):
 
     def return_to_menu(self):
         """
-        This method handles the GUI logic to return to the receptionist's menu.
-
-        Parameters:
-        (None)
-
-        Returns:
-        (None)
+        Return to the homepage.
         """
         self.place_forget()
+        self.grid_forget()
         self.homepage.place(relx=.5, rely=.5, anchor=tk.CENTER)
+
 
     def PY_tab_content(self):
         self.create_course_label(self.PY_tab, "Python Programming", "James V")
@@ -104,8 +97,8 @@ class CoursesPage(tk.Frame):
         tk.Label(parent, text=f"Mentor: {mentor_name}", font=('Arial', 12)).grid(row=1, column=0, pady=10)
 
     def open_lesson(self, course_name, lesson_name):
-        lesson_page = self.LessonPage(self.master, course_name, lesson_name, self)
-        self.grid_forget() 
+        lesson_page = LessonPage(self.master, course_name, lesson_name, self, app_user=any)
+        self.place_forget() 
         lesson_page.grid(row=0, column=0, sticky="nsew")
 
 if __name__ == "__main__":

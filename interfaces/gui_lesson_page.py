@@ -5,7 +5,6 @@ Contains class definition for the LessonPage window
 # Third party imports
 import tkinter as tk
 from tkinter import ttk
-import os
 
 class LessonPage(tk.Frame):
     def __init__(self, master, course_name, lesson_name, homepage, app_user):
@@ -34,6 +33,7 @@ class LessonPage(tk.Frame):
         Go back to the main course page.
         """
         self.grid_forget()  # Hide the lesson page
+        self.homepage.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         self.homepage.grid(row=0, column=0, sticky="nsew")  # Show the course page
 
 if __name__ == "__main__":

@@ -53,10 +53,10 @@ class HomePage(tk.Frame):
         self.footer_frame.grid(row=99, column=0, columnspan=2, pady=(30, 0))
 
         self.options_btn = self.create_styled_button("Settings", command=self.open_settings)
-        self.options_btn.grid(row=0, column=0, padx=5)
+        self.options_btn.grid(row=2, column=0, padx=5)
 
         self.logout_btn = self.create_styled_button("Log out", command=self.logout)
-        self.logout_btn.grid(row=0, column=1, padx=5)
+        self.logout_btn.grid(row=2, column=1, padx=5)
 
     def create_user_buttons(self):
         """
