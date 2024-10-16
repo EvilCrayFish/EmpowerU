@@ -9,7 +9,7 @@ import os
 
 class Post:
 
-    def __init__(self, ID, title, date, time, user, text): 
+    def __init__(self, ID, title, date, time, user, text, forum): 
         """
         Constructor method for the Post class.
         - All inputs are strings except for the ID which is an integer.
@@ -20,6 +20,7 @@ class Post:
         self.date = date
         self.time = time
         self.text = text
+        self.forum = forum
         self.comments = self.load_comments()
         self.code = self.load_code()          # Load the code associated with the post
 
@@ -30,7 +31,7 @@ class Post:
         """
         comments = []
         # Directory where comment files are stored
-        comment_dir = './data/forum/python_forum/comments/'
+        comment_dir = f'./data/forum/{self.forum}/comments/'
 
         # Iterate through files in the directory
         for filename in os.listdir(comment_dir):
@@ -75,7 +76,7 @@ class Post:
         """
         code = None
         # Directory where code files are stored
-        code_dir = './data/forum/python_forum/code/'
+        code_dir = f'./data/forum/{self.forum}/code/'
 
         # Construct the expected filename based on the post ID
         expected_filename = f"{self.id}_code.txt"
