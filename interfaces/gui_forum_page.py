@@ -116,6 +116,10 @@ class ForumPage(tk.Frame):
 
         # Bind canvas resizing to update its scrollable region
         self.button_frame.bind("<Configure>", lambda event: self.post_canvas_list.configure(scrollregion=self.post_canvas_list.bbox("all")))
+        
+        # Create New Post button at the bottom of the postframe
+        self.new_post_button = tk.Button(self.postframe, text="Create New Post", command=self.create_new_post_popup)
+        self.new_post_button.grid(row=2, column=0, padx=10, pady=10)
 
     def load_posts(self):
         posts = []
@@ -217,6 +221,74 @@ class ForumPage(tk.Frame):
         # Update the scroll region after adding all comments
         self.post_canvas.update_idletasks()
         self.post_canvas.configure(scrollregion=self.post_canvas.bbox("all"))
+
+    def create_new_post_popup(self):
+        """
+        Open a popup window for creating a new post.
+        """
+        self.popup = tk.Toplevel(self)
+        self.popup.title("Create New Post")
+
+        # Post Title Entry
+        tk.Label(self.popup, text="Title:").grid(row=0, column=0, padx=10, pady=10)
+        self.title_entry = tk.Entry(self.popup, width=50)
+        self.title_entry.grid(row=0, column=1, padx=10, pady=10)
+
+        # Post Content Textbox
+        tk.Label(self.popup, text="Content:").grid(row=1, column=0, padx=10, pady=10)
+        self.content_text = tk.Text(self.popup, width=50, height=10)
+        self.content_text.grid(row=1, column=1, padx=10, pady=10)
+
+        # Code Entry (optional)
+        tk.Label(self.popup, text="Code (optional):").grid(row=2, column=0, padx=10, pady=10)
+        self.code_text = tk.Text(self.popup, width=50, height=5)
+        self.code_text.grid(row=2, column=1, padx=10, pady=10)
+
+        # Publish and Cancel Buttons
+        self.publish_button = tk.Button(self.popup, text="Publish", command=self.publish_post)
+        self.publish_button.grid(row=3, column=1, padx=10, pady=10, sticky=tk.E)
+
+        self.cancel_button = tk.Button(self.popup, text="Cancel", command=self.popup.destroy)
+        self.cancel_button.grid(row=3, column=0, padx=10, pady=10, sticky=tk.W)
+    
+    def publish_post(self):
+        """
+        Save the new post to a CSV file and code to a text file.
+        """
+        import time
+        title = self.title_entry.get()
+        content = self.content_text.get("1.0", tk.END).strip()
+        code = self.code_text.get("1.0", tk.END).strip()
+        date = time.strftime("%d/%m/%Y")  # Placeholder, replace with current date
+        time = time.strftime("%H:%M")        # Placeholder, replace with current time
+        user = f"{self.user.first_name} {self.user.last_name}"    
+
+        if not title or not content:
+            return  # Don't allow publishing of empty posts
+
+        # Determine next available post ID
+        posts_dir = './data/forum/python_forum/posts/'
+        post_files = [f for f in os.listdir(posts_dir) if f.endswith('_post.csv')]
+        next_post_id = len(post_files) + 1
+
+        # Save post to CSV file
+        post_filename = f"{next_post_id}_post.csv"
+        with open(os.path.join(posts_dir, post_filename), 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([title, date, time, user])
+            writer.writerow([content])
+
+        # Save code to text file (if any)
+        if code:
+            code_dir = './data/forum/python_forum/code/'
+            code_filename = f"{next_post_id}_code.txt"
+            with open(os.path.join(code_dir, code_filename), 'w', encoding='utf-8') as codefile:
+                codefile.write(code)
+
+        # Close popup and refresh posts
+        self.popup.destroy()
+        self.posts = self.load_posts()
+        self.create_scrollable_posts()
 
     def wrap_text(self, text, line_length):
         """
