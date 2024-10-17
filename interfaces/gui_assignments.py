@@ -122,6 +122,8 @@ class AssignmentPage(tk.Frame):
         self.assignment = assignment
         self.assignments_page = assignments_page
 
+        self.attachments_path = f"data\\AssignmentAttachments\\{self.assignment.name}"
+
         self.return_button = tk.Button(self, text="Return to assignments", command=self.return_to_assignments)
         self.return_button.pack()
 
@@ -134,7 +136,9 @@ class AssignmentPage(tk.Frame):
         self.assignment_status_label = tk.Label(self, text=f"Assignment status: Incomplete")
         self.assignment_status_label.pack()
         
-        self.upload_button = tk.Button(self, text="Upload")
+        if os.path.exists(self.attachments_path):
+            self.open_button = tk.Button(self, text="Open attachments", command=self.open_attachments)
+            self.open_button.pack()
 
 
     def return_to_assignments(self):
@@ -149,6 +153,12 @@ class AssignmentPage(tk.Frame):
         """
         self.assignments_page.place(relx=.5, rely=.5, anchor=tk.CENTER)
         self.place_forget()
+
+    
+    def open_attachments(self):
+        
+        path = os.path.realpath(self.attachments_path)
+        os.startfile(path)
 
 
 
