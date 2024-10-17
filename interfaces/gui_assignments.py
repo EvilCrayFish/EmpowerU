@@ -20,12 +20,13 @@ class TestWindow(tk.Tk):
 
 
 class AssignmentsPage(tk.Frame):
-    def __init__(self, master, user):
+    def __init__(self, master, homepage, user):
         super().__init__(master=master)
         self.master = master
+        self.homepage = homepage
         self.user = user
 
-        self.return_button = tk.Button(self, text="Return to homepage")
+        self.return_button = tk.Button(self, text="Return to homepage", command=self.show_homepage)
         self.return_button.pack()
 
         self.title = tk.Label(self, text="Assignments", font=("Arial Bold", 20))
@@ -82,6 +83,11 @@ class AssignmentsPage(tk.Frame):
             assignment_widget = tk.Button(self, text=assignment, fg="blue", cursor="hand2", command=lambda : self.redirect_to_assignment(assignment))
             assignment_widget.pack()
             self.assignments_on_screen.append(assignment_widget)
+
+
+    def show_homepage(self):
+        self.place_forget()
+        self.homepage.show_menu()
 
 
     def redirect_to_assignment(self, assignment):

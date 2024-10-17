@@ -140,7 +140,7 @@ class HomePage(tk.Frame):
         self.hide_menu()
 
     def show_assignments_page(self):
-        forum_page = AssignmentsPage(self.master, self.user)
+        forum_page = AssignmentsPage(self.master, self, self.user)
         forum_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         self.hide_menu()
 
