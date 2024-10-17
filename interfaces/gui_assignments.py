@@ -94,11 +94,9 @@ class AssignmentsPage(tk.Frame):
 
         with open(assignments_dir, "r") as assignments_txt:
             assignments_lines = assignments_txt.readlines()
-            print(assignments_lines)
 
             for line in assignments_lines:
                 name, course, status = line.split(",")
-                print(course, searched_course, searched_course==course)
 
                 if name == searched_name:
                     return Assignment(name, course, status)
@@ -106,7 +104,6 @@ class AssignmentsPage(tk.Frame):
                     new_assignment = Assignment(name, course, status)
                     assignments.append(new_assignment)
 
-        print(assignments)
         return assignments
 
 
