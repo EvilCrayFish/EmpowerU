@@ -1,22 +1,7 @@
 import tkinter as tk
-
-class TestWindow(tk.Tk):
-    def __init__(self, title):
-        super().__init__()
-        super().title(title)
-        self.geometry("720x480")
-
-        self.assignment_page = AssignmentsPage(self, "user123")
-        self.show_assignments()
-
-
-    def show_assignments(self):
-        self.assignment_page.place(relx=.5, rely=.5, anchor=tk.CENTER)
-    
-
-    def hide_assignments(self):
-        self.assignment_page.place_forget()
-
+import os 
+import csv
+from classes.cls_assignment import Assignment
 
 
 class AssignmentsPage(tk.Frame):
@@ -71,16 +56,13 @@ class AssignmentsPage(tk.Frame):
             return
         
         if self.selected_course.get() == self.courses[-1]:
-            assignments = []
-            for i in self.assignment_lists[1:]:
-                assignments = assignments + i
+            assignments = self.read_assignments()
         else:
             index = self.courses.index(self.selected_course.get())
-            assignments = self.assignment_lists[index]
+            assignments = self.read_assignments(searched_course=self.courses[index])
         
         for assignment in assignments:
-            #The next line is very, very buggy
-            assignment_widget = tk.Button(self, text=assignment, fg="blue", cursor="hand2", command=lambda : self.redirect_to_assignment(assignment))
+            assignment_widget = tk.Button(self, text=assignment.name, fg="blue", cursor="hand2", command=lambda assignment=assignment : self.redirect_to_assignment(assignment))
             assignment_widget.pack()
             self.assignments_on_screen.append(assignment_widget)
 
@@ -89,29 +71,67 @@ class AssignmentsPage(tk.Frame):
         self.place_forget()
         self.homepage.show_menu()
 
+    
+    def read_assignments(self, searched_course=None, searched_name=None) -> list:
+        """
+        Reads the assignments in a txt file,
+        turns the assignments into Assignment objects,
+        and then returns all objects as part of a list
+
+        Parameters:
+            searched_course = the course filter
+                If none: search for all assignments
+                If not none: only return assignments that are part of a particular course
+            searched_name = the name filter
+                If none: add assignment to list
+                If not none: return assignment
+
+        Returns:
+            assignments = list of Assignment objects in assignments.txt which are part of searched_course 
+        """
+        assignments = []
+        assignments_dir = f'./data/assignments.txt'
+
+        with open(assignments_dir, "r") as assignments_txt:
+            assignments_lines = assignments_txt.readlines()
+            print(assignments_lines)
+
+            for line in assignments_lines:
+                name, course, status = line.split(",")
+                print(course, searched_course, searched_course==course)
+
+                if name == searched_name:
+                    return Assignment(name, course, status)
+                elif course == searched_course or searched_course is None:
+                    new_assignment = Assignment(name, course, status)
+                    assignments.append(new_assignment)
+
+        print(assignments)
+        return assignments
+
 
     def redirect_to_assignment(self, assignment):
-        assignment_page = AssignmentPage(self.master, self.user, self.selected_course.get(), assignment)
+        assignment_page = AssignmentPage(self.master, self.user, assignment, self)
         assignment_page.place(relx=.5, rely=.5, anchor=tk.CENTER)
-        self.master.hide_assignments()
+        self.place_forget()
 
 
 
 class AssignmentPage(tk.Frame):
-    def __init__(self, master, user, course, assignment):
+    def __init__(self, master, user, assignment, assignments_page):
         super().__init__(master=master)
         self.master = master
         self.user = user
-        self.course = course
-        self.assignment_name = assignment
+        self.assignment = assignment
+        self.assignments_page = assignments_page
 
         self.return_button = tk.Button(self, text="Return to assignments", command=self.return_to_assignments)
         self.return_button.pack()
 
-        self.assignment_title = tk.Label(self, text=f"Assignment {self.assignment_name}", font=("Arial Bold", 20))
+        self.assignment_title = tk.Label(self, text=f"Assignment {self.assignment.name}", font=("Arial Bold", 20))
         self.assignment_title.pack()
 
-        self.course_label = tk.Label(self, text=self.course)
+        self.course_label = tk.Label(self, text=self.assignment.course)
         self.course_label.pack()
 
         self.assignment_status_label = tk.Label(self, text=f"Assignment status: Incomplete")
@@ -130,8 +150,8 @@ class AssignmentPage(tk.Frame):
         Return(s):
         (None)
         """
+        self.assignments_page.place(relx=.5, rely=.5, anchor=tk.CENTER)
         self.place_forget()
-        self.master.show_assignments()
 
 
 
