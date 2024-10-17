@@ -24,21 +24,21 @@ class HomePage(tk.Frame):
         self.grid_columnconfigure(0, weight=1)  # Center content horizontally
         self.grid_rowconfigure(0, weight=1)
 
-        # Main container frame with padding
-        self.main_frame = tk.Frame(self, padx=30, pady=30)
-        self.main_frame.grid(row=0, column=0, sticky="nsew")
+        # # Main container frame with padding
+        # self.main_frame = tk.Frame(self, padx=30, pady=30)
+        # self.main_frame.grid(row=0, column=0, sticky="nsew")
 
         # Dynamic welcome message
         user_type = "USER" if isinstance(user, AppUser) else "TEACHER"
         self.welcome_label = tk.Label(
-            self.main_frame, text=f"Welcome, {user.first_name}!", 
+            self, text=f"Welcome, {user.first_name}!", 
             font=("Arial Bold", 24), pady=10
         )
         self.welcome_label.grid(row=0, column=0, columnspan=2, pady=(0, 20))
 
         # Navigation Label
         self.label1 = tk.Label(
-            self.main_frame, text="Please choose one of the following:", 
+            self, text="Please choose one of the following:", 
             font=("Arial", 16), pady=10
         )
         self.label1.grid(row=1, column=0, columnspan=2)
@@ -50,7 +50,7 @@ class HomePage(tk.Frame):
             self.create_teacher_buttons()
 
         # Footer with settings and logout buttons
-        self.footer_frame = tk.Frame(self.main_frame)
+        self.footer_frame = tk.Frame(self)
         self.footer_frame.grid(row=99, column=0, columnspan=2, pady=(30, 0))
 
         self.options_btn = self.create_styled_button("Settings", command=self.open_settings)
@@ -101,7 +101,7 @@ class HomePage(tk.Frame):
         - A styled Tkinter button.
         """
         button = tk.Button(
-            self.main_frame, text=text, font=("Arial", 14), width=25, command=command
+            self, text=text, font=("Arial", 14), width=25, command=command
         )
 
         def on_enter(event):

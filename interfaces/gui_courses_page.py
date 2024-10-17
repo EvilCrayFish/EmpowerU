@@ -7,14 +7,7 @@ from interfaces.gui_lesson_page import LessonPage
 
 class CoursesPage(tk.Frame):
     def __init__(self, master, homepage, app_user):
-        """
-        Constructor for the CommunityPage class.
 
-        Parameters:
-        - master: master widget of this widget instance
-        - receptionist_menu: an instance of the ReceptionistMenu class
-        - receptionist_user: an instance of the ReceptionistUser class
-        """
         #TODO FIX GUI layout
         #needs to get the progress information from the user profile then visualise it.
         super().__init__(master)
@@ -45,12 +38,6 @@ class CoursesPage(tk.Frame):
         # Home button to return to the homepage
         self.home_button = tk.Button(master=self.titleframe, text="Home", command=self.return_to_menu)
         self.home_button.grid(row=0, column=3, padx=10, pady=10, sticky=tk.E)
-
-        # Make the titleframe expand and occupy available space
-        self.grid_columnconfigure(0, weight=0)
-        self.grid_rowconfigure(0, weight=0)
-        self.grid_rowconfigure(1, weight=0)
-        self.grid_rowconfigure(2, weight=1)  #notebook
         
         #Courses notebook
         courses_notebook = ttk.Notebook(self)
@@ -79,9 +66,11 @@ class CoursesPage(tk.Frame):
 
         # Lesson modules
         tk.Button(self.PY_tab, text="Lesson 1", font=('Arial', 14), 
-                  command=lambda: self.open_lesson("Python Programming", "Lesson 1")).grid(row=2, column=0, pady=10, padx=10)
-        tk.Button(self.PY_tab, text="Lesson 2", font=('Arial', 14)).grid(row=2, column=1, padx=10,  pady=10)
-        tk.Button(self.PY_tab, text="Lesson 3", font=('Arial', 14)).grid(row=2, column=2, padx=10,  pady=10)
+                  command=lambda: self.show_lesson_page("Python Programming", "Lesson 1")).grid(row=2, column=0, pady=10, padx=10)
+        tk.Button(self.PY_tab, text="Lesson 2", font=('Arial', 14),
+                  command=lambda: self.show_lesson_page("Python Programming", "Lesson 2")).grid(row=2, column=1, pady=10, padx=10)
+        tk.Button(self.PY_tab, text="Lesson 3", font=('Arial', 14),
+                  command=lambda: self.show_lesson_page("Python Programming", "Lesson 3")).grid(row=2, column=2, pady=10, padx=10)
 
     def AI_tab_content(self):
         self.create_course_label(self.AI_tab, "Artificial Intelligence", "James V")
@@ -101,7 +90,7 @@ class CoursesPage(tk.Frame):
         tk.Label(parent, text=course_name, font=('Arial', 14)).grid(row=0, column=0, pady=10)
         tk.Label(parent, text=f"Mentor: {mentor_name}", font=('Arial', 12)).grid(row=1, column=0, pady=10)
 
-    def open_lesson(self, course_name, lesson_name):
+    def show_lesson_page(self, course_name, lesson_name):
         lesson_page = LessonPage(self.master, course_name, lesson_name, self, app_user=any)
         self.place_forget() 
         lesson_page.grid(row=0, column=0, sticky="nsew")

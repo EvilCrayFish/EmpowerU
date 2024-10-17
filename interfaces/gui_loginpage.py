@@ -24,66 +24,48 @@ class LoginPage(tk.Frame):
         # Configure the grid layout to center content
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
-
-        # Create a main frame to hold all elements with padding
-        self.main_frame = tk.Frame(self, padx=20, pady=20, relief="raised", borderwidth=2)
-        self.main_frame.grid(row=0, column=0, sticky="nsew")
-
+        
         # Logo Image
         self.logo_photoimage = tk.PhotoImage(master=self, file=self.image_path)
-        self.logo_label = tk.Label(self.main_frame, image=self.logo_photoimage)
+        self.logo_label = tk.Label(self, image=self.logo_photoimage)
         self.logo_label.grid(row=0, column=0, columnspan=2, pady=(10, 20))
 
         # Welcome Message
         self.login_title = tk.Label(
-            self.main_frame, text="Welcome to EmpowerU", font=("Arial Bold", 24), pady=10
+            self, text="Welcome to EmpowerU", font=("Arial Bold", 24), pady=10
         )
         self.login_title.grid(row=1, column=0, columnspan=2)
 
-        # Username Entry with Placeholder
+        # Username Entry
         self.username_var = tk.StringVar()
-        self.username_entry = self.create_placeholder_entry(
-            self.main_frame, self.username_var, "Enter your username"
-        )
+        self.username_entry = self.username_placeholder(
+            self, self.username_var, "Enter your username")
         self.username_entry.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
         # Password Entry with Placeholder
         self.password_var = tk.StringVar()
-        self.password_entry = self.create_placeholder_entry(
-            self.main_frame, self.password_var, "Enter your password", show="●"
-        )
+        self.password_entry = self.password_placeholder(
+            self, self.password_var, "Enter your password")
         self.password_entry.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
         # Login and Shutdown Buttons with Hover Effect
         self.login_button = self.create_styled_button(
-            self.main_frame, text="Login", command=self.login
+            self, text="Login", command=self.login
         )
         self.login_button.grid(row=4, column=0, columnspan=2, pady=(20, 10))
 
         self.shutdown_button = self.create_styled_button(
-            self.main_frame, text="Shut down", command=self.master.destroy
+            self, text="Shut down", command=self.master.destroy
         )
         self.shutdown_button.grid(row=5, column=0, columnspan=2, pady=5)
 
         # Alert Label
         self.alert_var = tk.StringVar()
-        self.alert_label = tk.Label(self.main_frame, textvariable=self.alert_var, fg="red", pady=5)
+        self.alert_label = tk.Label(self, textvariable=self.alert_var, fg="red", pady=5)
         self.alert_label.grid(row=6, column=0, columnspan=2)
 
-    def create_placeholder_entry(self, parent, var, placeholder, show=None):
-        """
-        Create an Entry widget with placeholder behavior.
-
-        Parameters:
-        - parent: The parent widget for the Entry.
-        - var: StringVar for the entry's value.
-        - placeholder: Placeholder text to show.
-        - show: Character to display for hidden text (e.g., ● for passwords).
-
-        Returns:
-        - Entry widget with placeholder behavior.
-        """
-        entry = tk.Entry(parent, textvariable=var, show=show, font=("Arial", 14), width=25)
+    def username_placeholder(self, parent, var, placeholder, show=None):
+        entry = tk.Entry(parent, textvariable=var, show=show, fg="grey", font=("Arial", 14), width=25)
 
         def on_focus_in(event):
             if var.get() == placeholder:
@@ -91,6 +73,24 @@ class LoginPage(tk.Frame):
 
         def on_focus_out(event):
             if not var.get():
+                var.set(placeholder)
+
+        var.set(placeholder)
+        entry.bind("<FocusIn>", on_focus_in)
+        entry.bind("<FocusOut>", on_focus_out)
+        return entry
+    
+    def password_placeholder(self, parent, var, placeholder):
+        entry = tk.Entry(parent, textvariable=var, fg="grey", font=("Arial", 14), width=25)
+
+        def on_focus_in(event):
+            if var.get() == placeholder:
+                entry.config(show="●")  # Show password when focused
+                var.set("")
+
+        def on_focus_out(event):
+            if not var.get():
+                entry.config(show="")  # Remove masking for the placeholder
                 var.set(placeholder)
 
         var.set(placeholder)

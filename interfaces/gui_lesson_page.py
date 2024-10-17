@@ -16,7 +16,6 @@ class LessonPage(tk.Frame):
         self.app_user = app_user
         
         self.grid(row=0, column=0, sticky="nsew")
-
         self.title_label = tk.Label(self, text=f"{self.course_name} - {self.lesson_name}", font=("Arial Bold", 24))
         self.title_label.grid(row=0, column=0, padx=20, pady=20)
 
