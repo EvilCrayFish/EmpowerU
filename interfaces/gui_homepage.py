@@ -4,6 +4,7 @@ from tkinter import messagebox
 from interfaces.gui_forum_page import ForumPage
 from interfaces.gui_progress_tracker import ProgressTracker
 from interfaces.gui_courses_page import CoursesPage
+from interfaces.gui_assignments import AssignmentsPage
 from classes.cls_app_user import AppUser
 from classes.cls_mentor import Mentor
 
@@ -84,7 +85,7 @@ class HomePage(tk.Frame):
         self.forum_btn.grid(row=3, column=1, pady=10, sticky="ew")
 
         self.progress_tracker_btn = self.create_styled_button(
-            "Assignments"
+            "Assignments", command=self.show_assignments_page
         )
         self.progress_tracker_btn.grid(row=4, column=0, pady=10, sticky="ew")
 
@@ -135,6 +136,11 @@ class HomePage(tk.Frame):
         Navigate to the Forum page.
         """
         forum_page = ForumPage(self.master, self, self.user)
+        forum_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+        self.hide_menu()
+
+    def show_assignments_page(self):
+        forum_page = AssignmentsPage(self.master, self.user)
         forum_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         self.hide_menu()
 
