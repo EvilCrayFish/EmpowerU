@@ -130,6 +130,10 @@ class AssignmentPage(tk.Frame):
 
         self.assignment_status_label = tk.Label(self, text=f"Assignment status: Incomplete")
         self.assignment_status_label.pack()
+
+        if type(self.user) in [Mentor, Staff]:
+            self.delete_assignment_btn = tk.Button(self, text="Delete assignment", command=self.delete_assignment)
+            self.delete_assignment_btn.pack()
         
         if os.path.exists(self.attachments_path):
             self.open_button = tk.Button(self, text="Open attachments", command=self.open_attachments)
@@ -139,6 +143,20 @@ class AssignmentPage(tk.Frame):
             self.add_attachment = tk.Button(self, text="Add attachments", command=self.open_attachments)
             self.add_attachment.pack()
 
+
+    def delete_assignment(self):
+        other_lines = []
+        with open("data\\assignments.txt", "r") as filer:
+            for line in filer.readlines():
+                line_information = line.strip().split(",")
+                if (self.assignment.name == line_information[0] and self.assignment.course == line_information[1]) == False:
+                    other_lines.append(line)
+        
+        with open("data\\assignments.txt", "w") as filer:
+            for line in other_lines:
+                filer.write(line)
+
+        self.return_to_assignments()
 
 
     def return_to_assignments(self):
