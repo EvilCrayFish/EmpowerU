@@ -14,18 +14,45 @@ class LessonPage(tk.Frame):
         self.course_name = course_name
         self.lesson_name = lesson_name
         self.app_user = app_user
+
+        self.lesson_information = self.get_lesson_line()
+        self.lesson_contents = self.lesson_information[2]
+        self.lesson_status = self.lesson_information[3]
         
         self.grid(row=0, column=0, sticky="nsew")
         self.title_label = tk.Label(self, text=f"{self.course_name} - {self.lesson_name}", font=("Arial Bold", 24))
         self.title_label.grid(row=0, column=0, padx=20, pady=20)
 
+        self.status_label = tk.Label(self, text=self.lesson_status)
+        self.status_label.grid(row=0,column=3, padx=20, pady=20)
+
         # Lesson content --> display generated content from data (.txt)
-        self.content_label = tk.Label(self, text="Lesson content goes here", font=("Arial", 14))
+        self.content_label = tk.Label(self, text=self.lesson_contents, font=("Arial", 14))
         self.content_label.grid(row=1, column=0, padx=20, pady=20)
 
         # Back to course page button
         self.back_button = tk.Button(self, text="Back to Courses", command=self.go_back_to_courses)
         self.back_button.grid(row=2, column=0, padx=20, pady=20)
+        
+
+    def get_lesson_line(self):
+        """
+        Reads lessons.txt to find all stored information about the lesson
+
+        Returns a list of strings - 
+        lesson_information[0] = course name
+        lesson_information[1] = lesson name
+        lesson_information[2] = lesson text contents
+        lesson_information[3] = lesson status
+        """
+        with open("data\\lessons.txt", "r") as filer:
+            for line in filer.readlines():
+                line_information = line.strip().split(";")
+                if self.course_name == line_information[0] and self.lesson_name == line_information[1]:
+                    return line_information
+                
+        return ["Error: lesson information not found"] * 4
+
 
     def go_back_to_courses(self):
         """

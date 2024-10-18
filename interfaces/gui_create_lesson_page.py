@@ -50,9 +50,10 @@ class CreateLessonPage(tk.Frame):
         file_path = "data\\lessons.txt"
 
         #The line to write into lessons.txt
-        lesson_info = f"{self.category_var.get()};{self.title_var.get()};{self.content_var.get()}\n"
+        lesson_info = f"{self.category_var.get()};{self.title_var.get()};{self.content_var.get()};Incomplete\n"
 
         with open(file_path, "a+") as filer:
+            #TODO: fix the if condition so that it only checks for title and category, not the whole line
             if lesson_info not in filer.readlines():
                 filer.write(lesson_info)
                 messagebox.showinfo("Lesson created", "Lesson has been successfuly added")

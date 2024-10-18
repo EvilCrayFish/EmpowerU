@@ -65,26 +65,33 @@ class CoursesPage(tk.Frame):
         self.create_course_label(self.PY_tab, "Python Programming", "James V")
 
         # Lesson modules
-        tk.Button(self.PY_tab, text="Lesson 1", font=('Arial', 14), 
-                  command=lambda: self.show_lesson_page("Python Programming", "Lesson 1")).grid(row=2, column=0, pady=10, padx=10)
-        tk.Button(self.PY_tab, text="Lesson 2", font=('Arial', 14),
-                  command=lambda: self.show_lesson_page("Python Programming", "Lesson 2")).grid(row=2, column=1, pady=10, padx=10)
-        tk.Button(self.PY_tab, text="Lesson 3", font=('Arial', 14),
-                  command=lambda: self.show_lesson_page("Python Programming", "Lesson 3")).grid(row=2, column=2, pady=10, padx=10)
+        lessons = self.read_lessons("Programming")
+        for i in range(len(lessons)):
+            tk.Button(self.PY_tab, text=lessons[i], font=('Arial', 14), 
+                  command=lambda lesson_name=lessons[i]: self.show_lesson_page("Programming", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
+            
+        # tk.Button(self.PY_tab, text="Lesson 1", font=('Arial', 14), 
+        #           command=lambda: self.show_lesson_page("Programming", "Lesson 1")).grid(row=2, column=0, pady=10, padx=10)
+        # tk.Button(self.PY_tab, text="Lesson 2", font=('Arial', 14),
+        #           command=lambda: self.show_lesson_page("Programming", "Lesson 2")).grid(row=2, column=1, pady=10, padx=10)
+        # tk.Button(self.PY_tab, text="Lesson 3", font=('Arial', 14),
+        #           command=lambda: self.show_lesson_page("Programming", "Lesson 3")).grid(row=2, column=2, pady=10, padx=10)
 
     def AI_tab_content(self):
         self.create_course_label(self.AI_tab, "Artificial Intelligence", "James V")
 
-        tk.Button(self.AI_tab, text="Lesson 1", font=('Arial', 14)).grid(row=2, column=0, pady=10)
-        tk.Button(self.AI_tab, text="Lesson 2", font=('Arial', 14)).grid(row=2, column=1, padx=10, pady=10)
-        tk.Button(self.AI_tab, text="Lesson 3", font=('Arial', 14)).grid(row=2, column=2, padx=10, pady=10)
+        lessons = self.read_lessons("AI")
+        for i in range(len(lessons)):
+            tk.Button(self.AI_tab, text=lessons[i], font=('Arial', 14), 
+                  command=lambda lesson_name=lessons[i]: self.show_lesson_page("AI", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
 
     def IS_tab_content(self):
         self.create_course_label(self.IS_tab, "Information Security", "James V")
 
-        tk.Button(self.IS_tab, text="Lesson 1", font=('Arial', 14)).grid(row=2, column=0, pady=10)
-        tk.Button(self.IS_tab, text="Lesson 2", font=('Arial', 14)).grid(row=2, column=1, padx=10, pady=10)
-        tk.Button(self.IS_tab, text="Lesson 3", font=('Arial', 14)).grid(row=2, column=2, padx=10, pady=10)
+        lessons = self.read_lessons("Information Security")
+        for i in range(len(lessons)):
+            tk.Button(self.IS_tab, text=lessons[i], font=('Arial', 14), 
+                  command=lambda lesson_name=lessons[i]: self.show_lesson_page("Information Security", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
 
     def create_course_label(self, parent, course_name, mentor_name):
         tk.Label(parent, text=course_name, font=('Arial', 14)).grid(row=0, column=0, pady=10)
@@ -95,6 +102,27 @@ class CoursesPage(tk.Frame):
         self.place_forget() 
         lesson_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         #lesson_page.grid(row=0, column=0, sticky="nsew")
+
+    def read_lessons(self, course):
+        """
+        Reads lessons.txt to find all stored information about all lessons
+
+        Parameters:
+        course - the course being searched for
+
+        Returns:
+        res - list of lesson names part of the course specfied in the parameter
+        """
+        res = []
+
+        with open("data\\lessons.txt", "r") as filer:
+            for line in filer.readlines():
+                line_information = line.strip().split(";")
+                if course == line_information[0]:
+                    res.append(line_information[1])
+
+        return res
+                    
 
 if __name__ == "__main__":
     # DO NOT MODIFY
