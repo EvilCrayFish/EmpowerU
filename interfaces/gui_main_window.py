@@ -23,7 +23,6 @@ class EmpowerU(tk.Tk):
         super().title(title)
         super().geometry(f"{width}x{height}")
 
-        #TODO Change Image
         self.loginpage = LoginPage(master=self, image_path="./images/logo.png")
         self.loginpage.pack(fill="both", expand=True)
         self.show_loginpage()

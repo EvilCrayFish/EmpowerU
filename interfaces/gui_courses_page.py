@@ -7,9 +7,6 @@ from interfaces.gui_lesson_page import LessonPage
 
 class CoursesPage(tk.Frame):
     def __init__(self, master, homepage, app_user):
-
-        #TODO FIX GUI layout
-        #needs to get the progress information from the user profile then visualise it.
         super().__init__(master)
         self.master = master
         self.homepage = homepage
