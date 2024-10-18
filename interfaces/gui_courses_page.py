@@ -93,7 +93,8 @@ class CoursesPage(tk.Frame):
     def show_lesson_page(self, course_name, lesson_name):
         lesson_page = LessonPage(self.master, course_name, lesson_name, self, app_user=any)
         self.place_forget() 
-        lesson_page.grid(row=0, column=0, sticky="nsew")
+        lesson_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+        #lesson_page.grid(row=0, column=0, sticky="nsew")
 
 if __name__ == "__main__":
     # DO NOT MODIFY
