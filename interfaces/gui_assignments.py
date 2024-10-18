@@ -1,7 +1,8 @@
 import tkinter as tk
 import os 
-import csv
 from classes.cls_assignment import Assignment
+from classes.cls_mentor import Mentor
+from classes.cls_staff import Staff
 
 
 class AssignmentsPage(tk.Frame):
@@ -140,6 +141,11 @@ class AssignmentPage(tk.Frame):
             self.open_button = tk.Button(self, text="Open attachments", command=self.open_attachments)
             self.open_button.pack()
 
+        if type(user) in [Mentor, Staff]:
+            self.add_attachment = tk.Button(self, text="Add attachments", command=self.open_attachments)
+            self.add_attachment.pack()
+
+
 
     def return_to_assignments(self):
         """
@@ -156,12 +162,7 @@ class AssignmentPage(tk.Frame):
 
     
     def open_attachments(self):
-        
+        if os.path.exists(self.attachments_path) == False:
+            os.mkdir(self.attachments_path)
         path = os.path.realpath(self.attachments_path)
         os.startfile(path)
-
-
-
-if __name__ == "__main__":
-    app = TestWindow("EmpowerU Assignments")
-    app.mainloop()
