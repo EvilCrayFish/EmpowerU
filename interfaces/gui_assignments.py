@@ -30,12 +30,6 @@ class AssignmentsPage(tk.Frame):
 
         self.select_course_button = tk.Button(self, text="Select course", command=self.update_assignment_list)
         self.select_course_button.pack()
-
-        #Each of these index should map to the index in self.courses
-        self.assignment_lists = ["No text to display", \
-                                ["Programming Assignment 1", "Programming Assignment 2"], \
-                                ["AI Assignment 1", "AI Assignment 2"], \
-                                ["IT Assignment 1", "IT Assignment 2"]]
         
         self.assignments_on_screen = []
 
@@ -51,7 +45,7 @@ class AssignmentsPage(tk.Frame):
             assignment.destroy()
 
         if self.selected_course.get() == self.courses[0]: #If no course is selected, show that no course is selected on screen, then exit the function
-            assignment = tk.Label(self, text=self.assignment_lists[0])
+            assignment = tk.Label(self, text="No assignment to display")
             assignment.pack()
             self.assignments_on_screen.append(assignment)
             return

@@ -2,5 +2,5 @@ Python Assignment 1,Programming,Incomplete
 Python Assignment 2,Programming,Complete
 AI Assignment 1,AI,Incomplete
 AI Assignment 2,AI,Incomplete
-IT Assignment 1,IT,Complete
-IT Assignment 2,IT,Incomplete
+Information Security Assignment 1,Information Security,Complete
+Information Security Assignment 2,Information Security,Incomplete

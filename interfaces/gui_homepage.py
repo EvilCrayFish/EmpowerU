@@ -70,10 +70,16 @@ class HomePage(tk.Frame):
         self.forum_btn = self.create_styled_button("Forum", command=self.show_forum_page)
         self.forum_btn.grid(row=3, column=1, pady=10, sticky="ew")
 
+        self.assignments_btn = self.create_styled_button(
+            "Assignments", command=self.show_assignments_page
+        )
+        self.assignments_btn.grid(row=4, column=0, pady=10, sticky="ew")
+
         self.progress_tracker_btn = self.create_styled_button(
             "Progress Tracker", command=self.show_progress_tracker
         )
-        self.progress_tracker_btn.grid(row=4, column=0, pady=10, sticky="ew")
+        self.progress_tracker_btn.grid(row=4, column=1, pady=10, sticky="ew")
+
 
     def create_teacher_buttons(self):
         """
@@ -85,10 +91,10 @@ class HomePage(tk.Frame):
         self.forum_btn = self.create_styled_button("Forum", command=self.show_forum_page)
         self.forum_btn.grid(row=3, column=1, pady=10, sticky="ew")
 
-        self.progress_tracker_btn = self.create_styled_button(
+        self.assignments_btn = self.create_styled_button(
             "Assignments", command=self.show_assignments_page
         )
-        self.progress_tracker_btn.grid(row=4, column=0, pady=10, sticky="ew")
+        self.assignments_btn.grid(row=4, column=0, pady=10, sticky="ew")
 
         self.create_lesson_btn = self.create_styled_button(
             "Create Lesson", command=self.show_create_lesson_page
