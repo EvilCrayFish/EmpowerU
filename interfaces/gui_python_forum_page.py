@@ -198,6 +198,10 @@ class PyForumPage(tk.Frame):
         comments_label = tk.Label(self.post_window, text="Comments", font=("Arial Bold", 14), anchor="nw")
         comments_label.pack(anchor="nw", pady=10, padx=10)
 
+        # Add Comment button
+        add_comment_button = tk.Button(self.post_window, text="Add Comment", command=lambda: self.create_new_comment_popup(post))
+        add_comment_button.pack(anchor="nw", padx=10, pady=10)
+
         for comment in reversed(post.comments):  # Show latest comment first
             # Author and meta (10px padding on the left)
             author_label = tk.Label(self.post_window, text=comment.author, font=("Arial", 10, "bold"), anchor="nw")
@@ -212,7 +216,7 @@ class PyForumPage(tk.Frame):
             comment_label.pack(anchor="nw", padx=50, pady=(0, 20))
 
             # Display code associated with the comment (if available)
-            comment_code = comment.load_code()
+            comment_code = comment.load_code(forumDir)
             if comment_code:
                 code_frame = tk.Frame(self.post_window, bg="black")
                 code_frame.pack(fill=tk.X, padx=50, pady=(0, 20))
@@ -253,6 +257,30 @@ class PyForumPage(tk.Frame):
         self.cancel_button = tk.Button(self.popup, text="Cancel", command=self.popup.destroy)
         self.cancel_button.grid(row=3, column=0, padx=10, pady=10, sticky=tk.W)
     
+    def create_new_comment_popup(self, post):
+        """
+        Open a popup window for adding a new comment to a post.
+        """
+        self.comment_popup = tk.Toplevel(self)
+        self.comment_popup.title("Add New Comment")
+
+        # Comment Content Textbox
+        tk.Label(self.comment_popup, text="Comment:").grid(row=0, column=0, padx=10, pady=10)
+        self.comment_content_text = tk.Text(self.comment_popup, width=50, height=10)
+        self.comment_content_text.grid(row=0, column=1, padx=10, pady=10)
+
+        # Code Entry (optional)
+        tk.Label(self.comment_popup, text="Code (optional):").grid(row=1, column=0, padx=10, pady=10)
+        self.comment_code_text = tk.Text(self.comment_popup, width=50, height=5)
+        self.comment_code_text.grid(row=1, column=1, padx=10, pady=10)
+
+        # Publish and Cancel Buttons
+        self.comment_publish_button = tk.Button(self.comment_popup, text="Publish", command=lambda: self.publish_comment(post))
+        self.comment_publish_button.grid(row=2, column=1, padx=10, pady=10, sticky=tk.E)
+
+        self.comment_cancel_button = tk.Button(self.comment_popup, text="Cancel", command=self.comment_popup.destroy)
+        self.comment_cancel_button.grid(row=2, column=0, padx=10, pady=10, sticky=tk.W)
+
     def publish_post(self):
         """
         Save the new post to a CSV file and code to a text file.
@@ -291,6 +319,51 @@ class PyForumPage(tk.Frame):
         self.popup.destroy()
         self.posts = self.load_posts()
         self.create_scrollable_posts()
+
+    def publish_comment(self, post):
+        """
+        Save the new comment to a CSV file and code to a text file.
+        """
+        import time
+        comment_text = self.comment_content_text.get("1.0", tk.END).strip()
+        comment_code = self.comment_code_text.get("1.0", tk.END).strip()
+        date = time.strftime("%d/%m/%Y")  # Placeholder, replace with current date
+        time_now = time.strftime("%H:%M")  # Placeholder, replace with current time
+        user = f"{self.user.first_name} {self.user.last_name}"
+
+        if not comment_text:
+            return  # Don't allow publishing of empty comments
+
+        # Determine next available comment ID
+        comments_dir = f'./data/forum/{forumDir}/comments/'
+        comment_files = [f for f in os.listdir(comments_dir) if f.startswith(f"{post.id}_") and f.endswith('_comments.csv')]
+        next_comment_id = len(comment_files) + 1
+
+        # Save comment to CSV file
+        comment_filename = f"{post.id}_{next_comment_id}_comments.csv"
+        with open(os.path.join(comments_dir, comment_filename), 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([date, time_now, user])
+            writer.writerow([comment_text])
+
+        # Save code to text file (if any)
+        if comment_code:
+            code_dir = f'./data/forum/{forumDir}/code/'
+            code_filename = f"{post.id}_{next_comment_id}_code.txt"
+            with open(os.path.join(code_dir, code_filename), 'w', encoding='utf-8') as codefile:
+                codefile.write(comment_code)
+
+        # Close popup and refresh the post view
+        self.comment_popup.destroy()
+
+        # Load posts and create the list
+        self.posts = self.load_posts()
+        self.create_scrollable_posts()
+
+        # Clear previous post content
+        for widget in self.post_window.winfo_children():
+            widget.destroy()
+
 
     def wrap_text(self, text, line_length):
         """

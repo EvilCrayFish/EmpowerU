@@ -22,13 +22,13 @@ class Comment:
         self.time = time                # Time the comment was made
         self.text = text                # The comment text
 
-    def load_code(self):
+    def load_code(self, forumDir):
         """
         Load the code associated with the comment from a text file named postID_commentID_code.txt.
         """
         code = None
         # Directory where code files are stored
-        code_dir = './data/forum/python_forum/code/'
+        code_dir = f'./data/forum/{forumDir}/code/'
 
         # Construct the expected filename based on the parent post ID and comment ID
         expected_filename = f"{self.parent_post.id}_{self.id}_code.txt"
