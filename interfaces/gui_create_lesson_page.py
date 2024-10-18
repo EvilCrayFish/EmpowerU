@@ -51,15 +51,22 @@ class CreateLessonPage(tk.Frame):
 
         #The line to write into lessons.txt
         lesson_info = f"{self.category_var.get()};{self.title_var.get()};{self.content_var.get()};Incomplete\n"
-
-        with open(file_path, "a+") as filer:
-            #TODO: fix the if condition so that it only checks for title and category, not the whole line
-            if lesson_info not in filer.readlines():
-                filer.write(lesson_info)
-                messagebox.showinfo("Lesson created", "Lesson has been successfuly added")
-            else:
-                messagebox.showerror("Lesson Already Exists", "Attempted to add lesson, but the lesson already exists.")
         
+        with open(file_path, "r") as filer: #Make sure lesson isn't already in lessons.txt
+            all_lines = filer.readlines()
+            for line in all_lines: 
+                line_information = line.split(";")
+                print(line)
+                print(line_information[0], self.category_var.get())
+                print(line_information[1], self.title_var.get())
+                if line_information[0] == self.category_var.get() and line_information[1] == self.title_var.get():
+                    messagebox.showerror("Lesson Already Exists", "Attempted to add lesson, but the lesson already exists.")
+                    return 
+
+        with open(file_path, "a") as filer: #Adds lesson to the text file
+            filer.write(lesson_info)
+            messagebox.showinfo("Lesson created", "Lesson has been successfuly added")
+            
         if add_attachments:
             attachments_path = f"data\\LessonAttachments\\{self.category_var.get()}_{self.title_entry.get()}"
             try:
