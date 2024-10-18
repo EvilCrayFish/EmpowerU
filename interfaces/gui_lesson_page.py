@@ -31,9 +31,10 @@ class LessonPage(tk.Frame):
         """
         Go back to the main course page.
         """
+        self.place_forget()
         self.grid_forget()  # Hide the lesson page
         self.homepage.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-        self.homepage.grid(row=0, column=0, sticky="nsew")  # Show the course page
+        #self.homepage.grid(row=0, column=0, sticky="nsew")  # Show the course page
 
 if __name__ == "__main__":
     # DO NOT MODIFY
