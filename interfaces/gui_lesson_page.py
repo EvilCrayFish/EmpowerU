@@ -30,10 +30,32 @@ class LessonPage(tk.Frame):
         self.content_label = tk.Label(self, text=self.lesson_contents, font=("Arial", 14))
         self.content_label.grid(row=1, column=0, padx=20, pady=20)
 
+        self.mark_complete_btn = tk.Button(self, text="Mark lesson complete", command=self.mark_complete)
+        self.mark_complete_btn.grid(row=0, column=4, padx=20, pady=20)
+
         # Back to course page button
         self.back_button = tk.Button(self, text="Back to Courses", command=self.go_back_to_courses)
         self.back_button.grid(row=2, column=0, padx=20, pady=20)
         
+
+    def mark_complete(self):
+        new_line = []
+        other_lines = []
+        with open("data\\lessons.txt", "r") as filer:
+            for line in filer.readlines():
+                line_information = line.strip().split(";")
+                if self.course_name == line_information[0] and self.lesson_name == line_information[1]:
+                    new_line = f"{self.course_name};{self.lesson_name};{self.lesson_contents};Complete\n"
+                else:
+                    other_lines.append(line)
+        
+        with open("data\\lessons.txt", "w") as filer:
+            for line in other_lines:
+                filer.write(line)
+            filer.write(new_line)
+        
+        self.go_back_to_courses()
+
 
     def get_lesson_line(self):
         """
