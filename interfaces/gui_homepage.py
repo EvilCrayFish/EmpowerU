@@ -5,6 +5,7 @@ from interfaces.gui_forum_page import ForumPage
 from interfaces.gui_progress_tracker import ProgressTracker
 from interfaces.gui_courses_page import CoursesPage
 from interfaces.gui_assignments import AssignmentsPage
+from interfaces.gui_create_lesson_page import CreateLessonPage
 from classes.cls_app_user import AppUser
 from classes.cls_mentor import Mentor
 
@@ -89,6 +90,11 @@ class HomePage(tk.Frame):
         )
         self.progress_tracker_btn.grid(row=4, column=0, pady=10, sticky="ew")
 
+        self.create_lesson_btn = self.create_styled_button(
+            "Create Lesson", command=self.show_create_lesson_page
+        )
+        self.create_lesson_btn.grid(row=4, column=1, pady=10, sticky="ew")
+
     def create_styled_button(self, text, command=None):
         """
         Create a styled button with consistent hover effects.
@@ -140,8 +146,13 @@ class HomePage(tk.Frame):
         self.hide_menu()
 
     def show_assignments_page(self):
-        forum_page = AssignmentsPage(self.master, self, self.user)
-        forum_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+        assignment_page = AssignmentsPage(self.master, self, self.user)
+        assignment_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+        self.hide_menu()
+
+    def show_create_lesson_page(self):
+        create_lesson_page = CreateLessonPage(self.master, self, self.user)
+        create_lesson_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         self.hide_menu()
 
     def show_search_teachers_frame(self):

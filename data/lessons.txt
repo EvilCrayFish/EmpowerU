@@ -1,0 +1,2 @@
+AI;AI Lesson 1;AI has been making waves across the world. Companies like OpenAI have been making products which are very influential on the IT industry.
+Programming;Python Programming 1;Welcome, students, to Python lesson 1!
