@@ -13,20 +13,69 @@ class ProgressTracker(tk.Frame):
         - receptionist_menu: an instance of the ReceptionistMenu class
         - receptionist_user: an instance of the ReceptionistUser class
         """
-        #TODO FIX GUI layout
-        #needs to get the progress information from the user profile then visualise it.
         super().__init__(master)
         self.master = master
         self.homepage = homepage
         self.app_user = app_user
 
 
-        self.title = tk.Label(self, text="Progress Tracker")
+        self.title = tk.Label(self, text="Progress Tracker", font=("Arial Bold", 20))
         self.title.pack(padx=10, pady=10)
         # Return to menu button
         self.return_button = tk.Button(self, text="Return to Menu", command=self.return_to_menu)
         self.return_button.pack(padx=10, pady=10)
 
+        self.programming_title = tk.Label(self, text="Programming")
+        self.programming_title.pack()
+        programming_lessons_data = self.measure_lesson_progress("Programming")
+        self.programming_lessons = tk.Label(self, text=f"{programming_lessons_data[0]}/{programming_lessons_data[1]}")
+        self.programming_lessons.pack()
+        self.programming_percent = tk.Label(self, text=f"{programming_lessons_data[2]}%\n")
+        self.programming_percent.pack()
+
+        self.ai_title = tk.Label(self, text="Artificial Intelligence")
+        self.ai_title.pack()
+        ai_lessons_data = self.measure_lesson_progress("AI")
+        self.ai_lessons = tk.Label(self, text=f"{ai_lessons_data[0]}/{ai_lessons_data[1]}")
+        self.ai_lessons.pack()
+        self.ai_percent = tk.Label(self, text=f"{ai_lessons_data[2]}%\n")
+        self.ai_percent.pack()
+
+        self.is_title = tk.Label(self, text="Information Security")
+        self.is_title.pack()
+        is_lessons_data = self.measure_lesson_progress("Information Security")
+        self.is_lessons = tk.Label(self, text=f"{is_lessons_data[0]}/{is_lessons_data[1]}")
+        self.is_lessons.pack()
+        self.is_percent = tk.Label(self, text=f"{is_lessons_data[2]}%\n")
+        self.is_percent.pack()
+
+
+    def measure_lesson_progress(self, course):
+        """
+        Reads lessons.txt to find number of complete lessons and number of total lessons in a course
+
+        Parameters:
+        course - the course being searched for
+
+        Returns:
+        list - number of completed lessons in the course, number of lessons in course
+        """
+        lessons = 0
+        completed_lessons = 0
+        with open("data\\lessons.txt", "r") as filer:
+            for line in filer.readlines():
+                line_information = line.strip().split(";")
+                if course == line_information[0]:
+                    lessons += 1
+                    if line_information[3] == "Complete":
+                        completed_lessons += 1
+
+        try:
+            percent = completed_lessons / lessons * 100
+        except ZeroDivisionError:
+            percent = 100.0
+        
+        return [completed_lessons, lessons, percent]
 
 
 
