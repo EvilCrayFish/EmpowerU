@@ -95,7 +95,7 @@ class CoursesPage(tk.Frame):
         tk.Label(parent, text=f"Mentor: {mentor_name}", font=('Arial', 12)).grid(row=1, column=0, pady=10)
 
     def show_lesson_page(self, course_name, lesson_name):
-        lesson_page = LessonPage(self.master, course_name, lesson_name, self, app_user=any)
+        lesson_page = LessonPage(self.master, course_name, lesson_name, self, app_user=self.app_user)
         self.place_forget() 
         lesson_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         #lesson_page.grid(row=0, column=0, sticky="nsew")

@@ -1,5 +1,5 @@
 """
-Contains class definition for the LessonPage window
+Contains class definition for the EditLessonPage window
 """
 
 # Third party imports
@@ -7,9 +7,8 @@ import tkinter as tk
 from tkinter import ttk
 from classes.cls_mentor import Mentor
 from classes.cls_staff import Staff
-from interfaces.gui_edit_lesson_page import EditLessonPage
 
-class LessonPage(tk.Frame):
+class EditLessonPage(tk.Frame):
     def __init__(self, master, course_name, lesson_name, homepage, app_user):
         super().__init__(master)
         self.master = master
@@ -24,35 +23,33 @@ class LessonPage(tk.Frame):
         
         self.grid(row=0, column=0, sticky="nsew")
         self.title_label = tk.Label(self, text=f"{self.course_name} - {self.lesson_name}", font=("Arial Bold", 24))
-        self.title_label.grid(row=0, column=0, padx=20, pady=20)
-
-        self.status_label = tk.Label(self, text=self.lesson_status)
-        self.status_label.grid(row=0,column=3, padx=20, pady=20)
+        self.title_label.grid(row=0, column=1, padx=20, pady=20)
 
         # Lesson content --> display generated content from data (.txt)
-        self.content_label = tk.Label(self, text=self.lesson_contents, font=("Arial", 14))
-        self.content_label.grid(row=1, column=0, padx=20, pady=20)
+        self.lesson_contents_var = tk.StringVar()
+        self.lesson_contents_var.set(self.lesson_contents)
+        self.content_entry = tk.Entry(self, textvariable=self.lesson_contents_var)
+        self.content_entry.grid(row=1, column=0)
 
-        self.mark_complete_btn = tk.Button(self, text="Mark lesson complete", command=self.mark_complete)
-        self.mark_complete_btn.grid(row=0, column=4, padx=20, pady=20)
+        self.content_btn = tk.Button(self, text="Update lesson contents", command=self.update_content)
+        self.content_btn.grid(row=1, column=1)
 
-        if type(self.app_user) in [Mentor, Staff]:
-            self.edit_lesson_btn = tk.Button(self, text="Edit lesson", command=self.show_edit_lesson_page)
-            self.edit_lesson_btn.grid(row=0, column=5, padx=20, pady=20)
+        self.delete_btn = tk.Button(self, text="Delete lesson", command=self.delete_lesson)
+        self.delete_btn.grid(row=2, column=0, padx=20, pady=20)
 
         # Back to course page button
-        self.back_button = tk.Button(self, text="Back to Courses", command=self.go_back_to_courses)
-        self.back_button.grid(row=2, column=0, padx=20, pady=20)
-        
+        self.back_button = tk.Button(self, text="Back to home", command=self.go_back_to_home)
+        self.back_button.grid(row=0, column=0, padx=20, pady=20)
 
-    def mark_complete(self):
+
+    def update_content(self):
         new_line = []
         other_lines = []
         with open("data\\lessons.txt", "r") as filer:
             for line in filer.readlines():
                 line_information = line.strip().split(";")
                 if self.course_name == line_information[0] and self.lesson_name == line_information[1]:
-                    new_line = f"{self.course_name};{self.lesson_name};{self.lesson_contents};Complete\n"
+                    new_line = f"{self.course_name};{self.lesson_name};{self.lesson_contents_var.get()};{line_information[3]}\n"
                 else:
                     other_lines.append(line)
         
@@ -60,8 +57,21 @@ class LessonPage(tk.Frame):
             for line in other_lines:
                 filer.write(line)
             filer.write(new_line)
+
+
+    def delete_lesson(self):
+        other_lines = []
+        with open("data\\lessons.txt", "r") as filer:
+            for line in filer.readlines():
+                line_information = line.strip().split(";")
+                if (self.course_name == line_information[0] and self.lesson_name == line_information[1]) == False:
+                    other_lines.append(line)
         
-        self.go_back_to_courses()
+        with open("data\\lessons.txt", "w") as filer:
+            for line in other_lines:
+                filer.write(line)
+
+        self.go_back_to_home()
 
 
     def get_lesson_line(self):
@@ -83,19 +93,13 @@ class LessonPage(tk.Frame):
         return ["Error: lesson information not found"] * 4
 
 
-    def show_edit_lesson_page(self):
-        self.place_forget()
-        self.grid_forget()
-        edit_lesson_page = EditLessonPage(self.master, self.course_name, self.lesson_name, self.homepage, self.app_user)
-        edit_lesson_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-
-    def go_back_to_courses(self):
+    def go_back_to_home(self):
         """
-        Go back to the main course page.
+        Go back to the homepage.
         """
         self.place_forget()
-        self.grid_forget()  # Hide the lesson page
-        self.homepage.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+        self.grid_forget()  # Hide the edit lesson page
+        self.homepage.homepage.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         #self.homepage.grid(row=0, column=0, sticky="nsew")  # Show the course page
 
 if __name__ == "__main__":
