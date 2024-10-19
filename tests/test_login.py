@@ -5,8 +5,8 @@ from classes.cls_mentor import Mentor
 
 def test_authenticate():
     "Test cases for the authenticate() static method for both the AppUser and Mentor class"
-    assert isinstance(Mentor.authenticate("rochelle", "r0che11e", path_to_root=".."), Mentor) == True
-    assert isinstance(AppUser.authenticate("jerry", "j3rrymay", path_to_root=".."), AppUser) == True
-    assert isinstance(AppUser.authenticate("max", "lynch", path_to_root=".."), AppUser) == False
-    assert isinstance(Mentor.authenticate("rochelle", "password", path_to_root=".."), Mentor) == False
-    assert isinstance(Mentor.authenticate("", "", path_to_root=".."), Mentor) == False 
+    assert isinstance(Mentor.authenticate("rochelle", "r0che11e"), Mentor) == True
+    assert isinstance(AppUser.authenticate("jerry", "j3rrymay"), AppUser) == True
+    assert isinstance(AppUser.authenticate("max", "lynch"), AppUser) == False
+    assert isinstance(Mentor.authenticate("rochelle", "password"), Mentor) == False
+    assert isinstance(Mentor.authenticate("", ""), Mentor) == False 
