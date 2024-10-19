@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from interfaces.gui_lesson_page import LessonPage
+from classes.cls_app_user import AppUser
 
 
 class CoursesPage(tk.Frame):
@@ -110,6 +111,8 @@ class CoursesPage(tk.Frame):
                 line_information = line.strip().split(";")
                 if course == line_information[0]:
                     res.append(line_information[1])
+                    if line_information[-1] == "Incomplete" and type(self.app_user) == AppUser:
+                        break #Don't list inaccessible lessons to students - users must complete lessons in order
 
         return res
                     

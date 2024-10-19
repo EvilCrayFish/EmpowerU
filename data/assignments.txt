@@ -1,5 +1,5 @@
-Python Assignment 2,Programming,Incomplete
 Information Security Assignment 1,Information Security,Incomplete
 Python Assignment 1,Programming,Complete
+Python Assignment 2,Programming,Incomplete
 AI Assignment 2,AI,Complete
 AI Assignment 1,AI,Complete
