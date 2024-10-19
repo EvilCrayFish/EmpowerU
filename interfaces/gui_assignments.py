@@ -128,8 +128,11 @@ class AssignmentPage(tk.Frame):
         self.course_label = tk.Label(self, text=self.assignment.course)
         self.course_label.pack()
 
-        self.assignment_status_label = tk.Label(self, text=f"Assignment status: Incomplete")
+        self.assignment_status_label = tk.Label(self, text=f"Assignment status: {self.assignment.status}")
         self.assignment_status_label.pack()
+
+        self.mark_complete_btn = tk.Button(self, text="Mark as complete", command=self.mark_complete)
+        self.mark_complete_btn.pack()
 
         if type(self.user) in [Mentor, Staff]:
             self.delete_assignment_btn = tk.Button(self, text="Delete assignment", command=self.delete_assignment)
@@ -155,6 +158,24 @@ class AssignmentPage(tk.Frame):
         with open("data\\assignments.txt", "w") as filer:
             for line in other_lines:
                 filer.write(line)
+
+        self.return_to_assignments()
+
+    
+    def mark_complete(self):
+        other_lines = []
+        with open("data\\assignments.txt", "r") as filer:
+            for line in filer.readlines():
+                line_information = line.strip().split(",")
+                if (self.assignment.name == line_information[0] and self.assignment.course == line_information[1]) == False:
+                    other_lines.append(line)
+                else:
+                    new_line = ",".join(line_information[:-1]) + ",Complete\n"
+        
+        with open("data\\assignments.txt", "w") as filer:
+            for line in other_lines:
+                filer.write(line)
+            filer.write(new_line)
 
         self.return_to_assignments()
 
