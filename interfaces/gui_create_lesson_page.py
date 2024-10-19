@@ -44,11 +44,16 @@ class CreateLessonPage(tk.Frame):
 
         self.content_var = self.content_entry.get("1.0", tk.END).strip()
 
-        #Make sure user hasn't typed unsupported character ; 
-        #If user has entered ; anywhere, end the function
+        #Make sure user hasn't typed unsupported characters ; or *
+        #If user has entered ; or * anywhere, end the function
         if ";" in (self.title_var.get() + self.content_var):
             messagebox.showerror("; detected", "You may not have the ; character in any field.")
             return
+        elif "*" in (self.title_var.get() + self.content_var):
+            messagebox.showerror("Asterisk detected", "You may not have the * character in any field.")
+            return
+        
+        self.content_var = self.content_var.replace("\n", "*")
 
         file_path = "data\\lessons.txt"
 

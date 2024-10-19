@@ -22,7 +22,7 @@ class LessonPage(tk.Frame):
         self.image_path = "./images/logo.png"
 
         self.lesson_information = self.get_lesson_line()
-        self.lesson_contents = self.lesson_information[2].replace("\\n","\n")
+        self.lesson_contents = self.lesson_information[2].replace("*","\n")
         self.lesson_status = self.lesson_information[3]
         
         self.grid(row=0, column=0, sticky="nsew")

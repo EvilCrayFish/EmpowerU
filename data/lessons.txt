@@ -4,4 +4,5 @@ AI;Generative AI 101;We're going to cover the basics of generative AI.;Incomplet
 PY;Python Programming 1;Welcome, students, to Python lesson 1!;Complete
 PY;Python Programming 2;aaaaaaa;Complete
 PY;Python Advanced 1;Python has a lot of really cool extra features. Take a look at them!;Complete
-PY;Python Advanced 2;We're going to take a look at Python's list comprehension.;Complete
+PY;Python Advanced 2;We're going to take a look at Python's list comprehension.;CompletePY;AI demo lesson;Hello, everyone!;Incomplete
+AI;AI Demo Lesson;Hello everyone!**Today we're going to have a demonstration of a simple AI program.**Afterwards, we're going to recap last lesson.;Incomplete

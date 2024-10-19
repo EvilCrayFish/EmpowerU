@@ -26,9 +26,8 @@ class EditLessonPage(tk.Frame):
         self.title_label.grid(row=0, column=1, padx=20, pady=20)
 
         # Lesson content --> display generated content from data (.txt)
-        self.lesson_contents_var = tk.StringVar()
-        self.lesson_contents_var.set(self.lesson_contents)
-        self.content_entry = tk.Entry(self, textvariable=self.lesson_contents_var)
+        self.content_entry = tk.Text(self, height=10, width=50)
+        self.content_entry.insert(tk.END, self.lesson_contents.replace("*", "\n"))
         self.content_entry.grid(row=1, column=0)
 
         self.content_btn = tk.Button(self, text="Update lesson contents", command=self.update_content)
@@ -43,13 +42,16 @@ class EditLessonPage(tk.Frame):
 
 
     def update_content(self):
+        self.content_var = self.content_entry.get("1.0", tk.END).strip()
+        self.content_var = self.content_var.replace("\n", "*")
+
         new_line = []
         other_lines = []
         with open("data\\lessons.txt", "r") as filer:
             for line in filer.readlines():
                 line_information = line.strip().split(";")
                 if self.course_name == line_information[0] and self.lesson_name == line_information[1]:
-                    new_line = f"{self.course_name};{self.lesson_name};{self.lesson_contents_var.get()};{line_information[3]}\n"
+                    new_line = f"{self.course_name};{self.lesson_name};{self.content_var};{line_information[3]}\n"
                 else:
                     other_lines.append(line)
         
