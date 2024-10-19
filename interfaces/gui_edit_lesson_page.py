@@ -108,8 +108,7 @@ class EditLessonPage(tk.Frame):
         """
         self.place_forget()
         self.grid_forget()  # Hide the edit lesson page
-        self.homepage.homepage.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-        #self.homepage.grid(row=0, column=0, sticky="nsew")  # Show the course page
+        self.homepage.homepage.place(relx=0.5, rely=0.5, anchor=tk.CENTER) # Show the course page
 
 if __name__ == "__main__":
     # DO NOT MODIFY
