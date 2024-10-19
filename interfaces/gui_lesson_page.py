@@ -22,7 +22,7 @@ class LessonPage(tk.Frame):
         self.image_path = "./images/logo.png"
 
         self.lesson_information = self.get_lesson_line()
-        self.lesson_contents = self.lesson_information[2]
+        self.lesson_contents = self.lesson_information[2].replace("\\n","\n")
         self.lesson_status = self.lesson_information[3]
         
         self.grid(row=0, column=0, sticky="nsew")
@@ -63,8 +63,8 @@ class LessonPage(tk.Frame):
         self.mark_complete_btn.grid(row=4, column=0, padx=20, pady=20)
 
         if type(self.app_user) in [Mentor, Staff]:
-            self.edit_lesson_btn = tk.Button(self, text="Edit lesson", command=self.show_edit_lesson_page)
-            self.edit_lesson_btn.grid(row=0, column=5, padx=20, pady=20)
+            self.edit_lesson_btn = tk.Button(master=self.titleframe, text="Edit lesson", command=self.show_edit_lesson_page)
+            self.edit_lesson_btn.grid(row=0, column=4, padx=20, pady=20, sticky=tk.E)
         
     def mark_complete(self):
         new_line = []

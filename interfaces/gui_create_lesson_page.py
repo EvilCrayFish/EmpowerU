@@ -31,9 +31,9 @@ class CreateLessonPage(tk.Frame):
 
         self.content_label = tk.Label(self, text="Lesson content: ")
         self.content_label.pack()
-        self.content_var = tk.StringVar(self)
-        self.content_entry = tk.Entry(self, textvariable=self.content_var)
-        self.content_entry.pack()
+
+        self.content_entry = tk.Text(self, height=10, width=50)
+        self.content_entry.pack(pady=10)
 
         self.create_lesson_btn = tk.Button(self, text="Create lesson", command=lambda: self.create_lesson(False))
         self.create_lesson_btn.pack()
@@ -41,16 +41,19 @@ class CreateLessonPage(tk.Frame):
         self.add_attachments_btn.pack()
 
     def create_lesson(self, add_attachments):
+
+        self.content_var = self.content_entry.get("1.0", tk.END).strip()
+
         #Make sure user hasn't typed unsupported character ; 
         #If user has entered ; anywhere, end the function
-        if ";" in (self.title_var.get() + self.content_var.get()):
+        if ";" in (self.title_var.get() + self.content_var):
             messagebox.showerror("; detected", "You may not have the ; character in any field.")
             return
 
         file_path = "data\\lessons.txt"
 
         #The line to write into lessons.txt
-        lesson_info = f"{self.category_var.get()};{self.title_var.get()};{self.content_var.get()};Incomplete\n"
+        lesson_info = f"{self.category_var.get()};{self.title_var.get()};{self.content_var};Incomplete\n"
         
         with open(file_path, "r") as filer: #Make sure lesson isn't already in lessons.txt
             all_lines = filer.readlines()
