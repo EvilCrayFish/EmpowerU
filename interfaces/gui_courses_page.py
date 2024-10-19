@@ -1,4 +1,3 @@
-
 # Third party imports
 import tkinter as tk
 from tkinter import ttk
@@ -36,7 +35,7 @@ class CoursesPage(tk.Frame):
         self.home_button = tk.Button(master=self.titleframe, text="Home", command=self.return_to_menu)
         self.home_button.grid(row=0, column=3, padx=10, pady=10, sticky=tk.E)
         
-        #Courses notebook
+        #Courses notebook - list of available courses to be selected
         courses_notebook = ttk.Notebook(self)
         self.PY_tab = ttk.Frame(courses_notebook)  
         self.AI_tab = ttk.Frame(courses_notebook) 
@@ -62,22 +61,15 @@ class CoursesPage(tk.Frame):
 
         # Lesson modules
         lessons = self.read_lessons("PY")
-        for i in range(len(lessons)):
+        for i in range(len(lessons)): #Generates button list
             tk.Button(self.PY_tab, text=lessons[i], font=('Arial', 14), 
                   command=lambda lesson_name=lessons[i]: self.show_lesson_page("PY", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
-            
-        # tk.Button(self.PY_tab, text="Lesson 1", font=('Arial', 14), 
-        #           command=lambda: self.show_lesson_page("Programming", "Lesson 1")).grid(row=2, column=0, pady=10, padx=10)
-        # tk.Button(self.PY_tab, text="Lesson 2", font=('Arial', 14),
-        #           command=lambda: self.show_lesson_page("Programming", "Lesson 2")).grid(row=2, column=1, pady=10, padx=10)
-        # tk.Button(self.PY_tab, text="Lesson 3", font=('Arial', 14),
-        #           command=lambda: self.show_lesson_page("Programming", "Lesson 3")).grid(row=2, column=2, pady=10, padx=10)
 
     def AI_tab_content(self):
         self.create_course_label(self.AI_tab, "Artificial Intelligence", "James V")
 
         lessons = self.read_lessons("AI")
-        for i in range(len(lessons)):
+        for i in range(len(lessons)): #Generates button list
             tk.Button(self.AI_tab, text=lessons[i], font=('Arial', 14), 
                   command=lambda lesson_name=lessons[i]: self.show_lesson_page("AI", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
 
@@ -85,7 +77,7 @@ class CoursesPage(tk.Frame):
         self.create_course_label(self.IS_tab, "Information Security", "James V")
 
         lessons = self.read_lessons("IS")
-        for i in range(len(lessons)):
+        for i in range(len(lessons)): #Generates button list
             tk.Button(self.IS_tab, text=lessons[i], font=('Arial', 14), 
                   command=lambda lesson_name=lessons[i]: self.show_lesson_page("IS", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
 
@@ -94,10 +86,12 @@ class CoursesPage(tk.Frame):
         tk.Label(parent, text=f"Mentor: {mentor_name}", font=('Arial', 10)).grid(row=0, column=1, pady=10)
 
     def show_lesson_page(self, course_name, lesson_name):
+        """
+        Redirects to page of selected lesson
+        """
         lesson_page = LessonPage(self.master, course_name, lesson_name, self, app_user=self.app_user)
         self.place_forget() 
         lesson_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-        #lesson_page.grid(row=0, column=0, sticky="nsew")
 
     def read_lessons(self, course):
         """

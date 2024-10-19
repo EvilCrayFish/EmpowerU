@@ -25,12 +25,7 @@ class HomePage(tk.Frame):
         self.grid_columnconfigure(0, weight=1)  # Center content horizontally
         self.grid_rowconfigure(0, weight=1)
 
-        # # Main container frame with padding
-        # self.main_frame = tk.Frame(self, padx=30, pady=30)
-        # self.main_frame.grid(row=0, column=0, sticky="nsew")
-
         # Dynamic welcome message
-        user_type = "USER" if isinstance(user, AppUser) else "TEACHER"
         self.welcome_label = tk.Label(
             self, text=f"Welcome, {user.first_name}!", 
             font=("Arial Bold", 24), pady=10
@@ -116,14 +111,14 @@ class HomePage(tk.Frame):
             self, text=text, font=("Arial", 14), width=25, command=command
         )
 
-        def on_enter(event):
+        def on_enter(event): #When button is hovered
             button.config(relief="raised", bg="#e0e0e0")
 
-        def on_leave(event):
+        def on_leave(event): #When button isn't hovered
             button.config(relief="flat", bg="SystemButtonFace")
 
-        button.bind("<Enter>", on_enter)
-        button.bind("<Leave>", on_leave)
+        button.bind("<Enter>", on_enter) #When button is hovered, trigger on_enter()
+        button.bind("<Leave>", on_leave) #When button ceases being hovered, trigger on_leave()
 
         return button
 
@@ -152,11 +147,17 @@ class HomePage(tk.Frame):
         self.hide_menu()
 
     def show_assignments_page(self):
+        """
+        Navigate to the Assignments page.
+        """
         assignment_page = AssignmentsPage(self.master, self, self.user)
         assignment_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         self.hide_menu()
 
     def show_create_lesson_page(self):
+        """
+        Navigate to the Create Lesson page.
+        """
         create_lesson_page = CreateLessonPage(self.master, self, self.user)
         create_lesson_page.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         self.hide_menu()

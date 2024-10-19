@@ -67,20 +67,23 @@ class LessonPage(tk.Frame):
             self.edit_lesson_btn.grid(row=0, column=4, padx=20, pady=20, sticky=tk.E)
         
     def mark_complete(self):
-        new_line = []
-        other_lines = []
+        """
+        Marks the lesson as complete by rewriting the text file,
+        with the change of the effected lesson being marked as complete.
+        """
+        lines = []
         with open("data\\lessons.txt", "r") as filer:
             for line in filer.readlines():
                 line_information = line.strip().split(";")
                 if self.course_name == line_information[0] and self.lesson_name == line_information[1]:
                     new_line = f"{self.course_name};{self.lesson_name};{self.lesson_contents};Complete\n"
+                    lines.append(new_line)
                 else:
-                    other_lines.append(line)
+                    lines.append(line)
         
         with open("data\\lessons.txt", "w") as filer:
-            for line in other_lines:
+            for line in lines:
                 filer.write(line)
-            filer.write(new_line)
         
         self.go_back_to_courses()
 

@@ -57,23 +57,45 @@ class LoginPage(tk.Frame):
         self.alert_label = tk.Label(self, textvariable=self.alert_var, fg="red", pady=5)
         self.alert_label.grid(row=6, column=0, columnspan=2)
 
-    def username_placeholder(self, parent, var, placeholder, show=None):
+    def username_placeholder(self, parent: tk.Frame, var: tk.StringVar, placeholder: str, show=None):
+        """
+        Generates the username entry box
+
+        Parameters:
+            parent - the LoginPage frame the box will sit in
+            var - the text which occupies the text box once user enters text
+            placeholder - the text which occupies the box before being edited (text cleared on interaction)
+        
+        Returns:
+            entry - a tk.Entry widget which is added to the screen and serves as the username entry
+        """
         entry = tk.Entry(parent, textvariable=var, show=show, fg="grey", font=("Arial", 14), width=25)
 
-        def on_focus_in(event):
+        def on_focus_in(event): #clear the default text when user clicks the box
             if var.get() == placeholder:
                 var.set("")
 
-        def on_focus_out(event):
+        def on_focus_out(event): #add the default text when user clicks off an empty box
             if not var.get():
                 var.set(placeholder)
 
-        var.set(placeholder)
-        entry.bind("<FocusIn>", on_focus_in)
-        entry.bind("<FocusOut>", on_focus_out)
+        var.set(placeholder) #Set text to default
+        entry.bind("<FocusIn>", on_focus_in) #check for on_focus_in - user clicks on box
+        entry.bind("<FocusOut>", on_focus_out) #check for on_focus_out - user clicks off box
         return entry
     
     def password_placeholder(self, parent, var, placeholder):
+        """
+        Generates the password entry box
+
+        Parameters:
+            parent - the LoginPage frame the box will sit in
+            var - the text which occupies the text box once user enters text
+            placeholder - the text which occupies the box before being edited (text cleared on interaction)
+        
+        Returns:
+            entry - a tk.Entry widget which is added to the screen and serves as the password entry
+        """
         entry = tk.Entry(parent, textvariable=var, fg="grey", font=("Arial", 14), width=25)
 
         def on_focus_in(event):
@@ -86,9 +108,9 @@ class LoginPage(tk.Frame):
                 entry.config(show="")  # Remove masking for the placeholder
                 var.set(placeholder)
 
-        var.set(placeholder)
-        entry.bind("<FocusIn>", on_focus_in)
-        entry.bind("<FocusOut>", on_focus_out)
+        var.set(placeholder) #Set text to default
+        entry.bind("<FocusIn>", on_focus_in) #check for on_focus_in - user clicks on box
+        entry.bind("<FocusOut>", on_focus_out) #check for on_focus_out - user clicks off box
         return entry
 
     def create_styled_button(self, parent, text, command):
@@ -105,10 +127,10 @@ class LoginPage(tk.Frame):
         """
         button = tk.Button(parent, text=text, font=("Arial", 14), width=15, command=command)
 
-        def on_enter(event):
+        def on_enter(event): #Style on hover
             button.config(relief="raised", background="#d1e0e0")
 
-        def on_leave(event):
+        def on_leave(event): #Style  not on hover
             button.config(relief="flat", background="SystemButtonFace")
 
         button.bind("<Enter>", on_enter)
@@ -122,23 +144,22 @@ class LoginPage(tk.Frame):
         username = self.username_var.get()
         password = self.password_var.get()
 
-        # Replace these with actual authentication logic
         app_user = AppUser.authenticate(username, password)
         mentor = Mentor.authenticate(username, password)
 
-        if isinstance(app_user, AppUser):
+        if isinstance(app_user, AppUser): #Was student login successful?
             user = app_user
             self.master.hide_loginpage()
             home_page = HomePage(self.master, user)
             home_page.show_menu()
             self.alert_var.set("")
-        elif isinstance(mentor, Mentor):
+        elif isinstance(mentor, Mentor): #Was teacher login successful?
             user = mentor
             self.master.hide_loginpage()
             home_page = HomePage(self.master, user)
             home_page.show_menu()
             self.alert_var.set("")
-        else:
+        else: #Username/password incorrect
             self.alert_var.set("Login Unsuccessful.")
             messagebox.showerror("Login Error", "Invalid username or password. Please try again.")
 

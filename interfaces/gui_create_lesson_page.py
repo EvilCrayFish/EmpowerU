@@ -41,8 +41,13 @@ class CreateLessonPage(tk.Frame):
         self.add_attachments_btn.pack()
 
     def create_lesson(self, add_attachments):
+        """
+        Appends lesson to lessons.txt
 
-        self.content_var = self.content_entry.get("1.0", tk.END).strip()
+        Parameters:
+            add_attachments - whether the function will open the attachments folder for the lesson at the end
+        """
+        self.content_var = self.content_entry.get("1.0", tk.END).strip() #The new contents
 
         #Make sure user hasn't typed unsupported characters ; or *
         #If user has entered ; or * anywhere, end the function
@@ -53,7 +58,7 @@ class CreateLessonPage(tk.Frame):
             messagebox.showerror("Asterisk detected", "You may not have the * character in any field.")
             return
         
-        self.content_var = self.content_var.replace("\n", "*")
+        self.content_var = self.content_var.replace("\n", "*") #Formatting newlines to be represented by asterisks
 
         file_path = "data\\lessons.txt"
 
@@ -75,7 +80,7 @@ class CreateLessonPage(tk.Frame):
             filer.write(lesson_info)
             messagebox.showinfo("Lesson created", "Lesson has been successfuly added")
             
-        if add_attachments:
+        if add_attachments: #Opens lesson attachments folder
             attachments_path = f"data\\LessonAttachments\\{self.category_var.get()}_{self.title_entry.get()}"
             try:
                 os.mkdir(attachments_path)

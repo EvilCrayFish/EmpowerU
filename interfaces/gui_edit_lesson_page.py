@@ -42,34 +42,41 @@ class EditLessonPage(tk.Frame):
 
 
     def update_content(self):
+        """
+        Reads lessons.txt into a list, but appends the edited lesson with the modified contents.
+        Clears lessons.txt, and then adds all the lessons into lessons.txt from the list.
+        """
         self.content_var = self.content_entry.get("1.0", tk.END).strip()
         self.content_var = self.content_var.replace("\n", "*")
 
-        new_line = []
-        other_lines = []
+        lines = []
         with open("data\\lessons.txt", "r") as filer:
             for line in filer.readlines():
                 line_information = line.strip().split(";")
                 if self.course_name == line_information[0] and self.lesson_name == line_information[1]:
                     new_line = f"{self.course_name};{self.lesson_name};{self.content_var};{line_information[3]}\n"
+                    lines.append(new_line)
                 else:
-                    other_lines.append(line)
+                    lines.append(line)
         
         with open("data\\lessons.txt", "w") as filer:
-            for line in other_lines:
+            for line in lines:
                 filer.write(line)
-            filer.write(new_line)
 
 
     def delete_lesson(self):
+        """
+        Stores every line of lessons.txt in an array except for the current lesson, 
+        and then adds those lessons back into lessons.txt after clearing the document.
+        """
         other_lines = []
-        with open("data\\lessons.txt", "r") as filer:
+        with open("data\\lessons.txt", "r") as filer: #Reads lines
             for line in filer.readlines():
                 line_information = line.strip().split(";")
                 if (self.course_name == line_information[0] and self.lesson_name == line_information[1]) == False:
                     other_lines.append(line)
         
-        with open("data\\lessons.txt", "w") as filer:
+        with open("data\\lessons.txt", "w") as filer: #Clears lines and adds back
             for line in other_lines:
                 filer.write(line)
 

@@ -1,5 +1,5 @@
 """
-#TODO File header pls
+Opens the app
 """
 
 # Third party imports
