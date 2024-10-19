@@ -1,6 +1,7 @@
 """
 FIT1056 2024 Semester 2
 EmpowerU Project
+Team G08
 
 Class definition for the Mentor
 Mentor are teachers
@@ -11,8 +12,6 @@ import os
 
 # Local application imports
 from classes.cls_user import User
-# from app.pst4_app_student import StudentUser
-#from app.pst4_app_teacher import TeacherUser
 
 class Mentor(User):
 
@@ -49,7 +48,18 @@ class Mentor(User):
 
     def __init__(self, uid, first_name, last_name, contact_num, username, password):
         """
-        Constructor method for the ReceptionistUser class
+        Constructor method for the ReceptionistUser class.
+
+        Parameters:
+        - uid: unique identifier for the user
+        - first_name: first name of the user
+        - last_name: last name of the user
+        - contact_num: contact number of the user
+        - username: username for the user
+        - password: password for the user
+
+        Returns:
+        (None)
         """
         super().__init__(uid, first_name, last_name, contact_num)
         self.username = username
@@ -67,7 +77,7 @@ class Mentor(User):
         (None)
         """
         self.import_teachers_data()
-        # self.import_students_data()
+
     
     def import_teachers_data(self):
         pass

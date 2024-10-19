@@ -1,0 +1,5 @@
+FIT1056 2024 Semester 2
+EmpowerU Project
+Team G08
+
+Only the TKinter package is required to run this program.

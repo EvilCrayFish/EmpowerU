@@ -1,11 +1,13 @@
 """
-Opens the app
+FIT1056 2024 Semester 2
+EmpowerU Project
+Team G08
+
+This file should be the one that is run to start the application.
 """
 
-# Third party imports
+# Imports
 import tkinter as tk
-
-# Local application imports
 from interfaces.gui_main_window import EmpowerU
 
 def main():
