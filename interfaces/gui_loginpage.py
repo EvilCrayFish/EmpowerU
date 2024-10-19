@@ -31,15 +31,12 @@ class LoginPage(tk.Frame):
         self.logo_label.grid(row=0, column=0, columnspan=2, pady=(10, 20))
 
         # Welcome Message
-        self.login_title = tk.Label(
-            self, text="Welcome to EmpowerU", font=("Arial Bold", 24), pady=10
-        )
+        self.login_title = tk.Label(self, text="Welcome to EmpowerU", font=("Arial Bold", 24), pady=10)
         self.login_title.grid(row=1, column=0, columnspan=2)
 
         # Username Entry
         self.username_var = tk.StringVar()
-        self.username_entry = self.username_placeholder(
-            self, self.username_var, "Enter your username")
+        self.username_entry = self.username_placeholder(self, self.username_var, "Enter your username")
         self.username_entry.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
         # Password Entry with Placeholder
@@ -49,14 +46,10 @@ class LoginPage(tk.Frame):
         self.password_entry.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
         # Login and Shutdown Buttons with Hover Effect
-        self.login_button = self.create_styled_button(
-            self, text="Login", command=self.login
-        )
+        self.login_button = self.create_styled_button(self, text="Login", command=self.login)
         self.login_button.grid(row=4, column=0, columnspan=2, pady=(20, 10))
 
-        self.shutdown_button = self.create_styled_button(
-            self, text="Shut down", command=self.master.destroy
-        )
+        self.shutdown_button = self.create_styled_button(self, text="Shut down", command=self.master.destroy)
         self.shutdown_button.grid(row=5, column=0, columnspan=2, pady=5)
 
         # Alert Label

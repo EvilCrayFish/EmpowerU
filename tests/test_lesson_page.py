@@ -1,5 +1,5 @@
 "Testing for the functionalities within the Progress tracker page for EmpowerU"
 
 
-def test_measure_lesson_progress():
+def test_get_lesson_line():
     pass
