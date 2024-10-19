@@ -1,7 +1,7 @@
 AI;AI Lesson 1;AI has been making waves across the world. Companies like OpenAI have been making products which are very influential on the IT industry.;Incomplete
-Programming;Python Programming 1;Welcome, students, to Python lesson 1!;Complete
-Programming;Python Programming 2;aaaaaaa;Incomplete
 AI;AI Lesson 2;AI is an emerging field with lots of new discoveries.;Incomplete
-Programming;Python Advanced 1;Python has a lot of really cool extra features. Take a look at them!;Incomplete
-Programming;Python Advanced 2;We're going to take a look at Python's list comprehension.;Incomplete
 AI;Generative AI 101;We're going to cover the basics of generative AI.;Incomplete
+PY;Python Programming 1;Welcome, students, to Python lesson 1!;Complete
+PY;Python Programming 2;aaaaaaa;Complete
+PY;Python Advanced 1;Python has a lot of really cool extra features. Take a look at them!;Complete
+PY;Python Advanced 2;We're going to take a look at Python's list comprehension.;Complete

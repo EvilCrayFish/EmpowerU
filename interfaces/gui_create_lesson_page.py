@@ -12,10 +12,10 @@ class CreateLessonPage(tk.Frame):
         self.return_button = tk.Button(self, text="Return to homepage", command=self.show_homepage)
         self.return_button.pack()
 
-        self.page_title = tk.Label(self, text="Assignments", font=("Arial Bold", 20))
+        self.page_title = tk.Label(self, text="Lesson Creation", font=("Arial Bold", 20))
         self.page_title.pack()
 
-        self.categories = ["Programming", "AI", "Information Security"]
+        self.categories = ["PY", "AI", "IS"]
         self.category_label = tk.Label(self, text="Lesson category: ")
         self.category_label.pack()
         self.category_var = tk.StringVar(self)

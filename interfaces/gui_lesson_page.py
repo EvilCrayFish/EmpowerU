@@ -1,6 +1,8 @@
 """
 Contains class definition for the LessonPage window
 """
+# Standard library imports
+import os
 
 # Third party imports
 import tkinter as tk
@@ -17,34 +19,53 @@ class LessonPage(tk.Frame):
         self.course_name = course_name
         self.lesson_name = lesson_name
         self.app_user = app_user
+        self.image_path = "./images/logo.png"
 
         self.lesson_information = self.get_lesson_line()
         self.lesson_contents = self.lesson_information[2]
         self.lesson_status = self.lesson_information[3]
         
         self.grid(row=0, column=0, sticky="nsew")
-        self.title_label = tk.Label(self, text=f"{self.course_name} - {self.lesson_name}", font=("Arial Bold", 24))
-        self.title_label.grid(row=0, column=0, padx=20, pady=20)
 
-        self.status_label = tk.Label(self, text=self.lesson_status)
-        self.status_label.grid(row=0,column=3, padx=20, pady=20)
+        # Top Frame (titleframe)
+        self.titleframe = tk.Frame(self, bd=5, relief="groove", width=1280)
+        self.titleframe.grid(row=0, column=0, sticky="nsew", columnspan=2)
+        self.titleframe.grid_columnconfigure(0, weight=0)
+        self.titleframe.grid_columnconfigure(1, weight=0)
+        self.titleframe.grid_columnconfigure(2, weight=0)
+        
+        self.logo_photoimage = tk.PhotoImage(master=self, file=self.image_path)
+        self.logo_label = tk.Label(master=self.titleframe, image=self.logo_photoimage, width=128, height=128)
+        self.logo_label.grid(row=0, column=0, sticky=tk.W, padx=10, pady=10)
+
+        self.login_title = tk.Label(master=self.titleframe, text="EMPOWERU", font=("Arial Bold", 30))
+        self.login_title.grid(row=0, column=1, sticky=tk.W)
+    
+        self.course_label = tk.Label(master=self.titleframe, text="Lessons Page", font=("Arial", 10))
+        self.course_label.grid(row=0, column=2, padx=10, pady=(10, 10), sticky=tk.W)  # Adjust pady to position it below the title
+
+        self.title_label = tk.Label(self, text=f"{self.course_name} - {self.lesson_name}", font=("Arial Bold", 24))
+        self.title_label.grid(row=1, column=0, padx=20, pady=20)
+
+        self.status_label = tk.Label(self, text=f"Lesson status: {self.lesson_status}")
+        self.status_label.grid(row=2,column=0, padx=20, pady=20)
+
+        # Return to courses page
+        self.back_to_courses_btn = tk.Button(master=self.titleframe, text="Return to Courses", command=self.go_back_to_courses)
+        self.back_to_courses_btn.grid(row=0, column=3, padx=10, pady=10, sticky=tk.E)
 
         # Lesson content --> display generated content from data (.txt)
         self.content_label = tk.Label(self, text=self.lesson_contents, font=("Arial", 14))
-        self.content_label.grid(row=1, column=0, padx=20, pady=20)
+        self.content_label.grid(row=3, column=0, padx=20, pady=20)
 
+        #Lesson complete button
         self.mark_complete_btn = tk.Button(self, text="Mark lesson complete", command=self.mark_complete)
-        self.mark_complete_btn.grid(row=0, column=4, padx=20, pady=20)
+        self.mark_complete_btn.grid(row=4, column=0, padx=20, pady=20)
 
         if type(self.app_user) in [Mentor, Staff]:
             self.edit_lesson_btn = tk.Button(self, text="Edit lesson", command=self.show_edit_lesson_page)
             self.edit_lesson_btn.grid(row=0, column=5, padx=20, pady=20)
-
-        # Back to course page button
-        self.back_button = tk.Button(self, text="Back to Courses", command=self.go_back_to_courses)
-        self.back_button.grid(row=2, column=0, padx=20, pady=20)
         
-
     def mark_complete(self):
         new_line = []
         other_lines = []
@@ -81,7 +102,6 @@ class LessonPage(tk.Frame):
                     return line_information
                 
         return ["Error: lesson information not found"] * 4
-
 
     def show_edit_lesson_page(self):
         self.place_forget()

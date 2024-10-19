@@ -17,7 +17,7 @@ class CoursesPage(tk.Frame):
 
         # Top Frame (titleframe)
         self.titleframe = tk.Frame(self, bd=5, relief="groove", width=1280)
-        self.titleframe.grid(row=0, column=0, sticky="nsew", columnspan=2)
+        self.titleframe.grid(row=0, column=0, sticky="nsew", columnspan=4)
         self.titleframe.grid_columnconfigure(0, weight=0)
         self.titleframe.grid_columnconfigure(1, weight=0)
         self.titleframe.grid_columnconfigure(2, weight=0)
@@ -57,15 +57,14 @@ class CoursesPage(tk.Frame):
         self.grid_forget()
         self.homepage.place(relx=.5, rely=.5, anchor=tk.CENTER)
 
-
     def PY_tab_content(self):
         self.create_course_label(self.PY_tab, "Python Programming", "James V")
 
         # Lesson modules
-        lessons = self.read_lessons("Programming")
+        lessons = self.read_lessons("PY")
         for i in range(len(lessons)):
             tk.Button(self.PY_tab, text=lessons[i], font=('Arial', 14), 
-                  command=lambda lesson_name=lessons[i]: self.show_lesson_page("Programming", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
+                  command=lambda lesson_name=lessons[i]: self.show_lesson_page("PY", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
             
         # tk.Button(self.PY_tab, text="Lesson 1", font=('Arial', 14), 
         #           command=lambda: self.show_lesson_page("Programming", "Lesson 1")).grid(row=2, column=0, pady=10, padx=10)
@@ -85,14 +84,14 @@ class CoursesPage(tk.Frame):
     def IS_tab_content(self):
         self.create_course_label(self.IS_tab, "Information Security", "James V")
 
-        lessons = self.read_lessons("Information Security")
+        lessons = self.read_lessons("IS")
         for i in range(len(lessons)):
             tk.Button(self.IS_tab, text=lessons[i], font=('Arial', 14), 
-                  command=lambda lesson_name=lessons[i]: self.show_lesson_page("Information Security", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
+                  command=lambda lesson_name=lessons[i]: self.show_lesson_page("IS", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
 
     def create_course_label(self, parent, course_name, mentor_name):
         tk.Label(parent, text=course_name, font=('Arial', 14)).grid(row=0, column=0, pady=10)
-        tk.Label(parent, text=f"Mentor: {mentor_name}", font=('Arial', 12)).grid(row=1, column=0, pady=10)
+        tk.Label(parent, text=f"Mentor: {mentor_name}", font=('Arial', 10)).grid(row=0, column=1, pady=10)
 
     def show_lesson_page(self, course_name, lesson_name):
         lesson_page = LessonPage(self.master, course_name, lesson_name, self, app_user=self.app_user)
