@@ -1,11 +1,15 @@
-import tkinter as tk
-from tkinter import messagebox  # For user-friendly alerts
+"""
+FIT1056 2024 Semester 2
+EmpowerU Project
+Team G08
 
-# Local application imports
-#TODO Define new page classes and change these imports
+Contains class definition for the LoginPage window
+"""
+# Imports
+import tkinter as tk
+from tkinter import messagebox 
 from classes.cls_app_user import AppUser
 from classes.cls_mentor import Mentor
-
 from interfaces.gui_homepage import HomePage
 
 class LoginPage(tk.Frame):
@@ -16,6 +20,9 @@ class LoginPage(tk.Frame):
         Parameters:
         - master: master widget of this widget instance
         - image_path: str, path of the logo image file
+
+        Returns:
+        (None)
         """
         super().__init__(master=master)
         self.master = master
@@ -24,7 +31,7 @@ class LoginPage(tk.Frame):
         # Configure the grid layout to center content
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
-        
+
         # Logo Image
         self.logo_photoimage = tk.PhotoImage(master=self, file=self.image_path)
         self.logo_label = tk.Label(self, image=self.logo_photoimage)
@@ -48,7 +55,6 @@ class LoginPage(tk.Frame):
         # Login and Shutdown Buttons with Hover Effect
         self.login_button = self.create_styled_button(self, text="Login", command=self.login)
         self.login_button.grid(row=4, column=0, columnspan=2, pady=(20, 10))
-
         self.shutdown_button = self.create_styled_button(self, text="Shut down", command=self.master.destroy)
         self.shutdown_button.grid(row=5, column=0, columnspan=2, pady=5)
 
@@ -62,39 +68,38 @@ class LoginPage(tk.Frame):
         Generates the username entry box
 
         Parameters:
-            parent - the LoginPage frame the box will sit in
-            var - the text which occupies the text box once user enters text
-            placeholder - the text which occupies the box before being edited (text cleared on interaction)
-        
+        - parent: the LoginPage frame the box will sit in
+        - var: the text which occupies the text box once user enters text
+        - placeholder: the text which occupies the box before being edited (text cleared on interaction)
+
         Returns:
-            entry - a tk.Entry widget which is added to the screen and serves as the username entry
+        - entry: a tk.Entry widget which is added to the screen and serves as the username entry
         """
         entry = tk.Entry(parent, textvariable=var, show=show, fg="grey", font=("Arial", 14), width=25)
 
-        def on_focus_in(event): #clear the default text when user clicks the box
+        def on_focus_in(event):  # clear the default text when user clicks the box
             if var.get() == placeholder:
                 var.set("")
-
-        def on_focus_out(event): #add the default text when user clicks off an empty box
+        def on_focus_out(event):  # add the default text when user clicks off an empty box
             if not var.get():
                 var.set(placeholder)
 
-        var.set(placeholder) #Set text to default
-        entry.bind("<FocusIn>", on_focus_in) #check for on_focus_in - user clicks on box
-        entry.bind("<FocusOut>", on_focus_out) #check for on_focus_out - user clicks off box
+        var.set(placeholder)  # Set text to default
+        entry.bind("<FocusIn>", on_focus_in)  
+        entry.bind("<FocusOut>", on_focus_out)  
         return entry
-    
+
     def password_placeholder(self, parent, var, placeholder):
         """
         Generates the password entry box
 
         Parameters:
-            parent - the LoginPage frame the box will sit in
-            var - the text which occupies the text box once user enters text
-            placeholder - the text which occupies the box before being edited (text cleared on interaction)
-        
+        - parent: the LoginPage frame the box will sit in
+        - var: the text which occupies the text box once user enters text
+        - placeholder: the text which occupies the box before being edited (text cleared on interaction)
+
         Returns:
-            entry - a tk.Entry widget which is added to the screen and serves as the password entry
+        - entry: a tk.Entry widget which is added to the screen and serves as the password entry
         """
         entry = tk.Entry(parent, textvariable=var, fg="grey", font=("Arial", 14), width=25)
 
@@ -102,15 +107,14 @@ class LoginPage(tk.Frame):
             if var.get() == placeholder:
                 entry.config(show="●")  # Show password when focused
                 var.set("")
-
         def on_focus_out(event):
             if not var.get():
                 entry.config(show="")  # Remove masking for the placeholder
                 var.set(placeholder)
 
-        var.set(placeholder) #Set text to default
-        entry.bind("<FocusIn>", on_focus_in) #check for on_focus_in - user clicks on box
-        entry.bind("<FocusOut>", on_focus_out) #check for on_focus_out - user clicks off box
+        var.set(placeholder)  # Set text to default
+        entry.bind("<FocusIn>", on_focus_in)  
+        entry.bind("<FocusOut>", on_focus_out)  
         return entry
 
     def create_styled_button(self, parent, text, command):
@@ -126,13 +130,10 @@ class LoginPage(tk.Frame):
         - Styled Button widget.
         """
         button = tk.Button(parent, text=text, font=("Arial", 14), width=15, command=command)
-
-        def on_enter(event): #Style on hover
+        def on_enter(event):  # Style on hover
             button.config(relief="raised", background="#d1e0e0")
-
-        def on_leave(event): #Style  not on hover
+        def on_leave(event):  # Style not on hover
             button.config(relief="flat", background="SystemButtonFace")
-
         button.bind("<Enter>", on_enter)
         button.bind("<Leave>", on_leave)
         return button
@@ -140,26 +141,33 @@ class LoginPage(tk.Frame):
     def login(self):
         """
         Handle login button click. Authenticate user and show alerts if necessary.
+
+        Parameters:
+        (None)
+
+        Returns:
+        (None)
         """
         username = self.username_var.get()
         password = self.password_var.get()
-
         app_user = AppUser.authenticate(username, password)
         mentor = Mentor.authenticate(username, password)
 
-        if isinstance(app_user, AppUser): #Was student login successful?
+        if isinstance(app_user, AppUser):  # Was student login successful?
             user = app_user
             self.master.hide_loginpage()
             home_page = HomePage(self.master, user)
             home_page.show_menu()
             self.alert_var.set("")
-        elif isinstance(mentor, Mentor): #Was teacher login successful?
+
+        elif isinstance(mentor, Mentor):  # Was teacher login successful?
             user = mentor
             self.master.hide_loginpage()
             home_page = HomePage(self.master, user)
             home_page.show_menu()
             self.alert_var.set("")
-        else: #Username/password incorrect
+
+        else:  # Username/password incorrect
             self.alert_var.set("Login Unsuccessful.")
             messagebox.showerror("Login Error", "Invalid username or password. Please try again.")
 
@@ -173,6 +181,3 @@ if __name__ == "__main__":
     root.geometry("400x500")  # Window size
     LoginPage(root, "logo.png").grid(sticky="nsew")  # Adjust with your logo path
     root.mainloop()
-
-
-

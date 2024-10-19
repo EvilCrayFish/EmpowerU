@@ -1,6 +1,7 @@
 """
 FIT1056 2024 Semester 2
 EmpowerU Project
+Team G08
 
 Class definition for User
 Users are the parent class for all other users

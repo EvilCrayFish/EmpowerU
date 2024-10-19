@@ -1,6 +1,7 @@
 """
 FIT1056 2024 Semester 2
 EmpowerU Project
+Team G08
 
 This file contains the class definition for the staff class.
 """
