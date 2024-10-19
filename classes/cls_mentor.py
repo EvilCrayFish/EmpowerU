@@ -1,5 +1,9 @@
 """
-#TODO
+FIT1056 2024 Semester 2
+EmpowerU Project
+
+Class definition for the Mentor
+Mentor are teachers
 """
 
 # Standard library imports
@@ -15,14 +19,14 @@ class Mentor(User):
     @staticmethod
     def authenticate(input_username, input_password):
         """
-        Method to authenticate a ReceptionistUser user.
+        Method to authenticate a Mentor user.
 
         Parameter(s):
         - input_username: str
         - input_password: str
 
         Returns:
-        - an instance of ReceptionistUser corresponding to the username if successful,
+        - an instance of Mentor corresponding to the username if successful,
           None otherwise
         """
         recept_path = "./data/mentors.txt"

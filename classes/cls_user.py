@@ -1,5 +1,9 @@
 """
-#TODO add Internal Documentation
+FIT1056 2024 Semester 2
+EmpowerU Project
+
+Class definition for User
+Users are the parent class for all other users
 """
 
 class User:
@@ -8,7 +12,7 @@ class User:
         """
         Constructor for the User class.
         """
-        self.uid = uid
+        self.uid = uid #User ID
         self.first_name = first_name
         self.last_name = last_name
         self.contact_num = contact_num
