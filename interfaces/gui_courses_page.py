@@ -92,7 +92,7 @@ class CoursesPage(tk.Frame):
         # Lesson modules
         lessons = self.read_lessons("PY")
         for i in range(len(lessons)):  # Generates button list
-            tk.Button(self.PY_tab, text=lessons[i], font=('Arial', 14),
+            tk.Button(self.PY_tab, text=lessons[i], font=('Arial', 12),
                       command=lambda lesson_name=lessons[i]: self.show_lesson_page("PY", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
 
     def AI_tab_content(self):
@@ -108,7 +108,7 @@ class CoursesPage(tk.Frame):
         self.create_course_label(self.AI_tab, "Artificial Intelligence", "James V")
         lessons = self.read_lessons("AI")
         for i in range(len(lessons)):  # Generates button list
-            tk.Button(self.AI_tab, text=lessons[i], font=('Arial', 14),
+            tk.Button(self.AI_tab, text=lessons[i], font=('Arial', 12),
                       command=lambda lesson_name=lessons[i]: self.show_lesson_page("AI", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
 
     def IS_tab_content(self):
@@ -124,7 +124,7 @@ class CoursesPage(tk.Frame):
         self.create_course_label(self.IS_tab, "Information Security", "James V")
         lessons = self.read_lessons("IS")
         for i in range(len(lessons)):  # Generates button list
-            tk.Button(self.IS_tab, text=lessons[i], font=('Arial', 14),
+            tk.Button(self.IS_tab, text=lessons[i], font=('Arial', 12),
                       command=lambda lesson_name=lessons[i]: self.show_lesson_page("IS", lesson_name)).grid(row=2, column=i, pady=10, padx=10)
 
     def create_course_label(self, parent, course_name, mentor_name):

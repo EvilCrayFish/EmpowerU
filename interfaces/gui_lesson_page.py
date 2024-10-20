@@ -77,7 +77,7 @@ class LessonPage(tk.Frame):
 
         # Lesson content
         self.content_label = tk.Label(master=self.lesson_window, text=self.lesson_contents, font=("Arial", 10), wraplength=400)
-        self.content_label.grid(row=3, column=0, padx=20, pady=20, )
+        self.content_label.grid(row=3, column=0, padx=20, pady=20)
 
         # Complete button
         self.mark_complete_btn = tk.Button(master=self.lesson_window, text="Mark lesson complete", command=self.mark_complete)
