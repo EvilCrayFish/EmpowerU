@@ -40,18 +40,21 @@ class EditLessonPage(tk.Frame):
         
         self.grid(row=0, column=0, sticky="nsew")
         self.title_label = tk.Label(self, text=f"{self.course_name} - {self.lesson_name}", font=("Arial Bold", 24))
-        self.title_label.grid(row=0, column=1, padx=20, pady=20)
+        self.title_label.grid(row=0, column=0, padx=20, pady=20)
+
         # Lesson content --> display generated content from data (.txt)
         self.content_entry = tk.Text(self, height=10, width=50)
         self.content_entry.insert(tk.END, self.lesson_contents.replace("*", "\n"))
-        self.content_entry.grid(row=1, column=0)
+        self.content_entry.grid(row=2, column=0)
+
         self.content_btn = tk.Button(self, text="Update lesson contents", command=self.update_content)
-        self.content_btn.grid(row=1, column=1)
+        self.content_btn.grid(row=3, column=0)
         self.delete_btn = tk.Button(self, text="Delete lesson", command=self.delete_lesson)
-        self.delete_btn.grid(row=2, column=0, padx=20, pady=20)
+        self.delete_btn.grid(row=4, column=0, padx=20, pady=20)
+
         # Back to course page button
-        self.back_button = tk.Button(self, text="Back to home", command=self.go_back_to_home)
-        self.back_button.grid(row=0, column=0, padx=20, pady=20)
+        self.back_button = tk.Button(self, text="Return to Courses", command=self.go_back_to_home)
+        self.back_button.grid(row=1, column=0, padx=20, pady=20)
 
     def update_content(self):
         """

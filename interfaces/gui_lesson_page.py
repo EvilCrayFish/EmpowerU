@@ -53,25 +53,40 @@ class LessonPage(tk.Frame):
         self.login_title.grid(row=0, column=1, sticky=tk.W)
         self.course_label = tk.Label(master=self.titleframe, text="Lessons Page", font=("Arial", 10))
         self.course_label.grid(row=0, column=2, padx=10, pady=(10, 10), sticky=tk.W)  # Adjust pady to position it below the title
-        self.title_label = tk.Label(self, text=f"{self.course_name} - {self.lesson_name}", font=("Arial Bold", 24))
-        self.title_label.grid(row=1, column=0, padx=20, pady=20)
-        self.status_label = tk.Label(self, text=f"Lesson status: {self.lesson_status}")
-        self.status_label.grid(row=2, column=0, padx=20, pady=20)
 
         # Return to courses page
         self.back_to_courses_btn = tk.Button(master=self.titleframe, text="Return to Courses", command=self.go_back_to_courses)
         self.back_to_courses_btn.grid(row=0, column=3, padx=10, pady=10, sticky=tk.E)
 
+        # Bottom frame
+        self.lesson_canvas = tk.Canvas(self, bd=5, relief="groove")
+        self.lesson_canvas.grid(row=1, column=0, sticky="nsew")
+        self.lesson_scrollbar = tk.Scrollbar(self, orient="vertical", command=self.lesson_canvas.yview)
+        self.lesson_scrollbar.grid(row=1, column=2, sticky="ns")
+
+        self.lesson_canvas.configure(yscrollcommand=self.lesson_scrollbar.set)
+
+        self.lesson_window = tk.Frame(self.lesson_canvas)
+        self.lesson_canvas.create_window((0, 0), window=self.lesson_window, anchor="nw")
+        self.lesson_window.bind("<Configure>", lambda e: self.lesson_canvas.configure(scrollregion=self.lesson_canvas.bbox("all")))
+        
+        self.title_label = tk.Label(master=self.lesson_window, text=f"{self.course_name} - {self.lesson_name}", font=("Arial Bold", 24))
+        self.title_label.grid(row=1, column=0, padx=20, pady=20)
+        self.status_label = tk.Label(master=self.lesson_window, text=f"Lesson status: {self.lesson_status}")
+        self.status_label.grid(row=2, column=0, padx=20, pady=20)
+
         # Lesson content
-        self.content_label = tk.Label(self, text=self.lesson_contents, font=("Arial", 14))
-        self.content_label.grid(row=3, column=0, padx=20, pady=20)
+        self.content_label = tk.Label(master=self.lesson_window, text=self.lesson_contents, font=("Arial", 10), wraplength=400)
+        self.content_label.grid(row=3, column=0, padx=20, pady=20, )
 
         # Complete button
-        self.mark_complete_btn = tk.Button(self, text="Mark lesson complete", command=self.mark_complete)
+        self.mark_complete_btn = tk.Button(master=self.lesson_window, text="Mark lesson complete", command=self.mark_complete)
         self.mark_complete_btn.grid(row=4, column=0, padx=20, pady=20)
         if type(self.app_user) in [Mentor, Staff]:
             self.edit_lesson_btn = tk.Button(master=self.titleframe, text="Edit lesson", command=self.show_edit_lesson_page)
             self.edit_lesson_btn.grid(row=0, column=4, padx=20, pady=20, sticky=tk.E)
+
+        
 
     def mark_complete(self):
         """
