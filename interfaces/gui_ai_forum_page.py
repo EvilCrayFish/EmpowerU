@@ -133,7 +133,7 @@ class AiForumPage(tk.Frame):
 
     def load_posts(self):
         """
-        Loads the all posts and their corresponding code (if any) from CSV and TXT files respectively and stores them as post objects in a list.
+        Loads all the posts and their corresponding code (if any) from CSV and TXT files respectively and stores them as post objects in a list.
 
         Parameter(s):
         - (None)
