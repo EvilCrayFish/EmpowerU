@@ -6,6 +6,5 @@ def test_read_assignments():
 
 
 
-
 def test_delete_assignment():
     pass
