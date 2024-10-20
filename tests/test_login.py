@@ -1,4 +1,11 @@
-"Testing for the functionalities within the Login page for EmpowerU"
+"""
+FIT1056 2024 Semester 2
+EmpowerU Project
+Team G08
+
+Contains testing for the LoginPage window
+"""
+
 
 from classes.cls_app_user import AppUser
 from classes.cls_mentor import Mentor

@@ -1,4 +1,11 @@
-"Testing for the functionalities within the edit lesson page for EmpowerU"
+"""
+FIT1056 2024 Semester 2
+EmpowerU Project
+Team G08
+
+Contains testing for the EditLessonPage window
+"""
+
 
 from interfaces.gui_edit_lesson_page import EditLessonPage
 from interfaces.gui_homepage import HomePage

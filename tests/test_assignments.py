@@ -1,4 +1,11 @@
-"Testing for the functionalities within the assignments page for EmpowerU"
+"""
+FIT1056 2024 Semester 2
+EmpowerU Project
+Team G08
+
+Contains testing for the Assignments window
+"""
+
 
 
 def test_read_assignments():

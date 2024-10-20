@@ -1,4 +1,11 @@
-"Testing for the functionalities within the Progress tracker page for EmpowerU"
+"""
+FIT1056 2024 Semester 2
+EmpowerU Project
+Team G08
+
+Contains testing for the ProgressTracker window
+"""
+
 
 from interfaces.gui_progress_tracker import ProgressTracker
 from interfaces.gui_homepage import HomePage
