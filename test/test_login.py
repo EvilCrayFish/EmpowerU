@@ -21,4 +21,3 @@ def test_authenticate():
     assert isinstance(AppUser.authenticate("", "j3rrymay"), AppUser) == False
     assert isinstance(Mentor.authenticate("rochelle", ""), Mentor) == False
     assert isinstance(Mentor.authenticate("", "r0che11e"), Mentor) == False
-    

@@ -1,3 +1,3 @@
-from tests.test_login import *
+from test.test_login import *
 
 test_authenticate()
