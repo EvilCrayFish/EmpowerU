@@ -1,3 +1,4 @@
 "Testing for the functionalities within the Progress tracker page for EmpowerU"
 
 def test_load_posts():
+    pass
