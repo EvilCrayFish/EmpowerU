@@ -48,13 +48,6 @@ class Staff(User):
         else:
             print(f"Please check subdirectory and file {recept_path} exists.")
 
-    def updateProfile():
-        #TODO Write method
-        pass
-    def returnProfile():
-        #TODO Write method
-        pass
-
 
 if __name__ == "__main__":
     pass

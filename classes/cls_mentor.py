@@ -66,21 +66,6 @@ class Mentor(User):
         self.password = password
         self.import_all_data()
 
-    def import_all_data(self):
-        """
-        Method to read all data by calling methods to read teachers data and students data.
-
-        Parameter(s):
-        (None)
-
-        Returns:
-        (None)
-        """
-        self.import_teachers_data()
-
-    
-    def import_teachers_data(self):
-        pass
 
     
 if __name__ == "__main__":
