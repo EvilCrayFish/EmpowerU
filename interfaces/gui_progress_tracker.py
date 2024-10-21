@@ -7,9 +7,9 @@ class ProgressTracker(tk.Frame):
         Constructor for the ProgressTracker class.
         
         Parameters:
-        - master: master widget of this widget instance
-        - homepage: an instance of the HomePage class
-        - app_user: an instance of the User class
+        - master: object - master widget of this widget instance
+        - homepage: object - an instance of the HomePage class
+        - app_user: object - an instance of the User class
 
         Returns:
         (None)
@@ -53,10 +53,10 @@ class ProgressTracker(tk.Frame):
         Reads lessons.txt to find number of complete lessons and number of total lessons in a course.
         
         Parameters:
-        - course: the course being searched for
+        - course: string - the course being searched for
         
         Returns:
-        - list: number of completed lessons in the course, number of lessons in course.
+        - information: list containing integers - number of completed lessons in the course, number of lessons in course.
         """
         lessons = 0
         completed_lessons = 0
@@ -71,7 +71,8 @@ class ProgressTracker(tk.Frame):
             percent = completed_lessons / lessons * 100
         except ZeroDivisionError:
             percent = 100.0
-        return [completed_lessons, lessons, percent]
+        information = [completed_lessons, lessons, percent]
+        return information
 
     def return_to_menu(self):
         """

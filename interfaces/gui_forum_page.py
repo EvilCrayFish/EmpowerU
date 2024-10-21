@@ -22,9 +22,9 @@ class ForumPage(tk.Frame):
         Constructor for the ForumPage class.
         
         Parameters:
-        - master: master widget of this widget instance
-        - homepage: an instance of the HomePage Window
-        - user: an instance of the User class
+        - master: object - master widget of this widget instance
+        - homepage: object - an instance of the HomePage Window
+        - user: object - an instance of the User class
 
         Returns:
         (None)

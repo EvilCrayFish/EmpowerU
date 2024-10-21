@@ -18,8 +18,8 @@ class LoginPage(tk.Frame):
         Constructor for the LoginPage class.
 
         Parameters:
-        - master: master widget of this widget instance
-        - image_path: str, path of the logo image file
+        - master: object - master widget of this widget instance
+        - image_path: string - path of the logo image file
 
         Returns:
         (None)
@@ -68,12 +68,12 @@ class LoginPage(tk.Frame):
         Generates the username entry box
 
         Parameters:
-        - parent: the LoginPage frame the box will sit in
-        - var: the text which occupies the text box once user enters text
-        - placeholder: the text which occupies the box before being edited (text cleared on interaction)
+        - parent: object - the LoginPage frame the box will sit in
+        - var: string - the text which occupies the text box once user enters text
+        - placeholder: string - the text which occupies the box before being edited (text cleared on interaction)
 
         Returns:
-        - entry: a tk.Entry widget which is added to the screen and serves as the username entry
+        - entry: object - a tk.Entry widget which is added to the screen and serves as the username entry
         """
         entry = tk.Entry(parent, textvariable=var, show=show, fg="grey", font=("Arial", 14), width=25)
 
@@ -94,12 +94,12 @@ class LoginPage(tk.Frame):
         Generates the password entry box
 
         Parameters:
-        - parent: the LoginPage frame the box will sit in
-        - var: the text which occupies the text box once user enters text
-        - placeholder: the text which occupies the box before being edited (text cleared on interaction)
+        - parent: object - the LoginPage frame the box will sit in
+        - var: string - the text which occupies the text box once user enters text
+        - placeholder: string - the text which occupies the box before being edited (text cleared on interaction)
 
         Returns:
-        - entry: a tk.Entry widget which is added to the screen and serves as the password entry
+        - entry: object - a tk.Entry widget which is added to the screen and serves as the password entry
         """
         entry = tk.Entry(parent, textvariable=var, fg="grey", font=("Arial", 14), width=25)
 
@@ -122,12 +122,12 @@ class LoginPage(tk.Frame):
         Create a button with consistent styling and hover effect.
 
         Parameters:
-        - parent: The parent widget for the button.
-        - text: The text on the button.
-        - command: The function to call on click.
+        - parent: object - The parent widget for the button.
+        - text: string - The text on the button.
+        - command: string - The function to call on click.
 
         Returns:
-        - Styled Button widget.
+        - button: object -Styled Button widget.
         """
         button = tk.Button(parent, text=text, font=("Arial", 14), width=15, command=command)
         def on_enter(event):  # Style on hover

@@ -18,9 +18,9 @@ class CoursesPage(tk.Frame):
         Constructor for the CoursesPage class.
 
         Parameters:
-        - master: master widget of this widget instance
-        - homepage: an instance of the homepage
-        - app_user: an instance of the AppUser class
+        - master: object - master widget of this widget instance
+        - homepage: object - an instance of the homepage
+        - app_user: object - an instance of the AppUser class
 
         Returns:
         (None)
@@ -132,9 +132,9 @@ class CoursesPage(tk.Frame):
         Create a label for the course with its name and mentor.
 
         Parameters:
-        - parent: The parent widget for the label.
-        - course_name: The name of the course.
-        - mentor_name: The name of the mentor.
+        - parent: object - The parent widget for the label.
+        - course_name: string - The name of the course.
+        - mentor_name: string - The name of the mentor.
 
         Returns:
         (None)
@@ -147,8 +147,8 @@ class CoursesPage(tk.Frame):
         Redirects to page of selected lesson.
 
         Parameters:
-        - course_name: The name of the course.
-        - lesson_name: The name of the lesson.
+        - course_name: string - The name of the course.
+        - lesson_name: string - The name of the lesson.
 
         Returns:
         (None)
@@ -162,10 +162,10 @@ class CoursesPage(tk.Frame):
         Reads lessons.txt to find all stored information about all lessons.
 
         Parameters:
-        - course: The course being searched for.
+        - course: string - The course being searched for.
 
         Returns:
-        - res: list of lesson names part of the course specified in the parameter.
+        - res: list - list of lesson names part of the course specified in the parameter.
         """
         res = []
         with open("data\\lessons.txt", "r") as filer:

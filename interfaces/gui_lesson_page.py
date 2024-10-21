@@ -18,11 +18,11 @@ class LessonPage(tk.Frame):
         Constructor for the LessonPage class.
         
         Parameters:
-        - master: master widget of this widget instance
-        - course_name: name of the course
-        - lesson_name: name of the lesson
-        - homepage: an instance of the HomePage class
-        - app_user: an instance of the app user
+        - master: object - master widget of this widget instance
+        - course_name: string - name of the course
+        - lesson_name: string - name of the lesson
+        - homepage: object - an instance of the HomePage class
+        - app_user: object - an instance of the app user
 
         Returns:
         (None)
@@ -118,7 +118,7 @@ class LessonPage(tk.Frame):
         Reads lessons.txt to find all stored information about the lesson
         
         Returns:
-        - a list of strings containing lesson details
+        - line_information: list - a list of strings containing lesson details
         """
         with open("data\\lessons.txt", "r") as filer:
             for line in filer.readlines():

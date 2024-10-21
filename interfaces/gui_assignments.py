@@ -19,9 +19,9 @@ class AssignmentsPage(tk.Frame):
         Constructor for the AssignmentsPage class.
 
         Parameters:
-        - master: master widget of this widget instance
-        - homepage: an instance of the homepage
-        - user: an instance of the User class
+        - master: object -master widget of this widget instance
+        - homepage: object -an instance of the homepage
+        - user: object -an instance of the User class
 
         Returns:
         (None)
@@ -100,15 +100,15 @@ class AssignmentsPage(tk.Frame):
         and then returns all objects as part of a list
 
         Parameters:
-        - searched_course: the course filter
+        - searched_course: string - the course filter
             If None: search for all assignments
             If not None: only return assignments that are part of a particular course
-        - searched_name: the name filter
+        - searched_name: string - the name filter
             If None: add assignment to list
             If not None: return assignment
 
         Returns:
-        - assignments: list of Assignment objects in assignments.txt which are part of searched_course
+        - assignments: list - list of Assignment objects in assignments.txt which are part of searched_course
         """
         assignments = []
         assignments_dir = f'./data/assignments.txt'
@@ -128,7 +128,7 @@ class AssignmentsPage(tk.Frame):
         Redirect to the assignment page.
 
         Parameters:
-        - assignment: An instance of the Assignment class.
+        - assignment: object - An instance of the Assignment class.
 
         Returns:
         (None)
@@ -143,10 +143,10 @@ class AssignmentPage(tk.Frame):
         Constructor for the AssignmentPage class.
 
         Parameters:
-        - master: master widget of this widget instance
-        - user: an instance of the User class
-        - assignment: an instance of the Assignment class
-        - assignments_page: an instance of the AssignmentsPage class
+        - master: object - master widget of this widget instance
+        - user: object - an instance of the User class
+        - assignment: object - an instance of the Assignment class
+        - assignments_page: object - an instance of the AssignmentsPage class
 
         Returns:
         (None)

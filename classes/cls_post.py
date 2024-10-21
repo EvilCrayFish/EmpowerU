@@ -14,6 +14,19 @@ class Post:
         """
         Constructor method for the Post class.
         - All inputs are strings except for the ID which is an integer.
+
+         Parameter(s):
+        - ID: 
+        - title: string - the title of the post
+        - date: string - the date which the post was made in dd/mm/yy format
+        - time: string - the time which the post was bade in hh:mm format 
+        - user: string - the name of the user who made the post
+        - text: string - the main body text of the post
+        - forum: string - the forum which the post belongs to
+
+        Returns:
+        (None)
+
         """
         self.id = int(ID)
         self.title = title
@@ -29,6 +42,13 @@ class Post:
         """
         Load comments for this post from the corresponding CSV files in the specified directory.
         Each comment file should follow the naming format: postid_commentid_comment.csv.
+
+        Parameter(s):
+        (None)
+
+        Returns:
+        - code: string - the code attatched to the comment.
+
         """
         comments = []
         # Directory where comment files are stored
@@ -65,15 +85,30 @@ class Post:
     def create_comment(self, ID, author, date, time, text):
         """
         Factory method to create a Comment object.
-        This method allows importing Comment without circular dependencies.
+        
+        Parameter(s):
+        - ID: string - the Post's ID 
+        - Author: string - the name of the person who wrote the Post.
+        - date: string - the date which the comment was made in dd/mm/yy format
+        - time: string - the time which the comment was made in hh:mm format 
+        - text: string - the main text in the comment's body
+
+        Returns:
+        - object - an instace of the Post class.
+
         """
-        from classes.cls_comment import Comment  # Importing here avoids circular imports
+        from classes.cls_comment import Comment
         return Comment(self, ID, author, date, time, text)
 
     def load_code(self):
         """
-        Load the code associated with the post from a text file named postid_code.txt.
-        Only files with a single number at the beginning (e.g., '1_code.txt') are considered.
+        Load the code associated with the Post from a text file named postID_commentID_code.txt.
+
+        Parameter(s):
+        - forumDir: string - the directory where the code is stored.
+
+        Returns:
+        - code: string - the code attatched to the post.
         """
         code = None
         # Directory where code files are stored

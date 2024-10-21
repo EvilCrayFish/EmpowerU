@@ -13,19 +13,31 @@ class Comment:
     def __init__(self, parent_post, ID, author, date, time, text): 
         """
         Constructor method for the Comment class.
-        - Represents a comment on a post, without inheriting from Post.
-        - All inputs are strings.
+        Parameters:
+        - parent_post: object - The parent post 
+        - ID: string - the parent post's ID
+        - author: string - name of the user who made the comment
+        - date: string - the date in dd/mm/yyyy format
+        - time: string - the time in hh:mm format
+        - text: string - the main text in the comment
         """
-        self.parent_post = parent_post  # Reference to the parent post
-        self.id = ID                    # Unique ID for the comment
-        self.author = author            # Author of the comment
-        self.date = date                # Date the comment was made
-        self.time = time                # Time the comment was made
-        self.text = text                # The comment text
+        self.parent_post = parent_post 
+        self.id = ID                    
+        self.author = author          
+        self.date = date                
+        self.time = time                
+        self.text = text                
 
     def load_code(self, forumDir):
         """
         Load the code associated with the comment from a text file named postID_commentID_code.txt.
+
+        Parameter(s):
+        - forumDir: string - the directory where the code is stored.
+
+        Returns:
+        - code: string - the code attatched to the comment.
+
         """
         code = None
         # Directory where code files are stored
@@ -42,11 +54,6 @@ class Comment:
 
         return code
     
-    def __str__(self):
-        """
-        String representation for printing comments easily.
-        """
-        return f"Comment by {self.author} on {self.date} at {self.time}: {self.text}"
 
 # DO NOT MODIFY BEYOND THIS LINE
 if __name__ == "__main__":

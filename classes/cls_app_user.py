@@ -17,11 +17,11 @@ class AppUser(User):
         Method to authenticate an AppUser user.
 
         Parameter(s):
-        - input_username: str
-        - input_password: str
+        - input_username: string
+        - input_password: string
 
         Returns:
-        - an instance of AppUser corresponding to the username if successful,
+        - object - an instance of AppUser corresponding to the username if successful,
           None otherwise
         """
         recept_path = "./data/users.txt"
@@ -45,12 +45,12 @@ class AppUser(User):
         Constructor method for the ReceptionistUser class.
 
         Parameter(s):
-        - uid: unique identifier for the user
-        - first_name: first name of the user
-        - last_name: last name of the user
-        - contact_num: contact number of the user
-        - username: username for the user
-        - password: password for the user
+        - uid: string - unique identifier for the user
+        - first_name: string - first name of the user
+        - last_name: string - last name of the user
+        - contact_num: string - contact number of the user
+        - username: string - username for the user
+        - password: string - password for the user
 
         Returns:
         (None)
@@ -60,6 +60,82 @@ class AppUser(User):
         self.password = password
         self.import_all_data()
 
+    def import_all_data(self):
+        """
+        Imports all relevant data about a user including their progress within the courses.
+
+        Parameters:
+        (None)
+
+        Returns:
+        (None)
+        """
+        pass
+
+    def get_name(self):
+        """
+        Returns the user's full name.
+
+        Parameters:
+        (None)
+
+        Returns:
+        - string - user's full name
+        """
+        return f"{self._fname} {self._lname}"
+
+    def update_password(self, new_password: str):
+        """
+        Turns the new password into a salted hash and passes to the database.
+
+        Parameters:
+        - new_password: plaintext string of the new password to set the user's password to
+
+        Returns:
+        - bool: whether the new password is set or not
+        """
+        pass
+
+    @staticmethod
+    def login(self, username, password):
+        """
+        Checks the input username and password against the username and password associated with the user.
+
+        Parameters:
+        - username: the username of the user attempting to log in
+        - password: the plaintext password of the user attempting to log in
+
+        Returns:
+        - bool: whether the login was successful or not
+        """
+        pass
+
+    def update_lesson_progress(self, course, progress):
+        """
+        Updates lesson progress, idk how yet
+
+        Parameters:
+        - course: the area where progress was made
+        - progress: the amount of progress made
+
+        Returns:
+        (None)
+        """
+        pass
+
+    def get_lesson_progress(self, course):
+        """
+        Checks the amount of progress made in a course and returns the % amount
+
+        Parameters:
+        - course: which course is being reported on
+
+        Returns:
+        - int: the amount of progress the user has made in that course
+        """
+        pass
+
+    def make_post(self):
         """
         This is very underdeveloped but the idea is it compiles the post and then returns it for another object to actually store it.
 

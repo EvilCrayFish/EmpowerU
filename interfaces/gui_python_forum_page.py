@@ -23,9 +23,9 @@ class PyForumPage(tk.Frame):
         Constructor for the PyForumPage class.
 
         Parameters:
-        - master: master widget of this widget instance
-        - homepage: an instance of the ForumPage class
-        - user: an instance of the User class
+        - master: object - master widget of this widget instance
+        - homepage: object - an instance of the ForumPage class
+        - user: object - an instance of the User class
         """
         self.master = master
         self.homepage = homepage
@@ -95,7 +95,7 @@ class PyForumPage(tk.Frame):
         Users click on these buttons to view the post's contents. 
 
         Parameters:
-        - posts: a list of post objects (usually containing posts which contain the search keywords.)
+        - posts: a list of post objects - containins posts which contain the search keywords.
 
         Returns:
         (None)
@@ -140,7 +140,7 @@ class PyForumPage(tk.Frame):
         - (None)
 
         Returns:
-        - a list of post objects
+        - posts: list - a list of post objects
 
         """
         posts = []
@@ -218,7 +218,7 @@ class PyForumPage(tk.Frame):
         This method handles the GUI logic for loading comments attatched to a particular post.
 
         Parameter(s):
-        - post: the post object which the user has clicked.
+        - post: object - the post object which the user has clicked.
 
         Returns:
         (None)
@@ -293,7 +293,7 @@ class PyForumPage(tk.Frame):
         Open a popup window for adding a new comment to a post.
 
         Parameter(s):
-        - post: the post object which the user wants to create a comment for
+        - post: object - the post object which the user wants to create a comment for
 
         Returns:
         (None)
@@ -369,7 +369,7 @@ class PyForumPage(tk.Frame):
         This method saves the new comment to a CSV file and code to a text file.
 
         Parameter(s):
-        - post: the post object which reresents the post which the comment is attatched to
+        - post: object - the post object which reresents the post which the comment is attatched to
 
         Returns:
         (None)
@@ -416,11 +416,11 @@ class PyForumPage(tk.Frame):
         Utility function to wrap text at word boundaries without exceeding the specified line_length.
 
         Parameter(s):
-        - text: the text which needs to be wrapped.
-        - line_length: the maximum characters that can be on a particular line. 
+        - text: string - the text which needs to be wrapped.
+        - line_length: integer - the maximum characters that can be on a particular line. 
 
         Returns:
-        - The text but with newlines added at the start of every word which exceeds the character count. 
+        - final_text: string - The text but with newlines added at the start of every word which exceeds the character count. 
 
         """
         words = text.split()
@@ -438,7 +438,8 @@ class PyForumPage(tk.Frame):
                     current_line = word
 
         wrapped_lines.append(current_line)
-        return "\n".join(wrapped_lines)
+        final_text = "\n".join(wrapped_lines)
+        return final_text
 
     def search_posts(self):
         """

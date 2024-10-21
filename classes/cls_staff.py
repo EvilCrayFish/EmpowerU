@@ -12,7 +12,18 @@ import os
 class Staff(User):
     def __init__(self, uid, first_name, last_name, contact_num, email, role):
         """
-        Constructor for the User class.
+        Constructor method for the Staff class which inherits from the user class.
+
+        Parameter(s):
+        - uid: string - unique identifier for the Staff
+        - first_name: string - first name of the Staff
+        - last_name: string - last name of the Staff
+        - contact_num: string - contact number of the Staff
+        - username: string - username for the Staff
+        - password: string - password for the Staff
+
+        Returns:
+        (None)
         """
         super().__init__(uid, first_name, last_name, contact_num)
         self.email = email

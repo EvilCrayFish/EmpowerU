@@ -8,6 +8,14 @@ This file contains the class definition for the Assignment class.
 
 class Assignment:
     def __init__(self, name, course, status):
+        """
+        Constructor method for the Assignment class.
+        
+        Parameters:
+        - name: string - name of the assignment. 
+        - course: string - name of the course
+        - status: string - The status of the the course (either Complete or Incomplete)
+        """
         self.name = name
         self.course = course
         self.status = status

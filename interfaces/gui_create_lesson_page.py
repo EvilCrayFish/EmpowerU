@@ -18,7 +18,7 @@ class CreateLessonPage(tk.Frame):
 
         Parameters:
         - master: master widget of this widget instance
-        - homepage: an instance of the homepage
+        - homepage: an instance of the homepage class
         - app_user: an instance of the AppUser class
 
         Returns:
@@ -62,7 +62,7 @@ class CreateLessonPage(tk.Frame):
         Appends lesson to lessons.txt
 
         Parameters:
-        - add_attachments: whether the function will open the attachments folder for the lesson at the end
+        - add_attachments: bool; whether the function will open the attachments folder for the lesson at the end
 
         Returns:
         (None)

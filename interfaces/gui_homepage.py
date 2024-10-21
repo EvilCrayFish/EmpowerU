@@ -23,8 +23,8 @@ class HomePage(tk.Frame):
         Constructor for the HomePage class.
 
         Parameters:
-        - master: The main application window.
-        - user: An instance representing the logged-in user (AppUser or Mentor).
+        - master: object - The main application window.
+        - user: object - An instance representing the logged-in user (AppUser or Mentor).
 
         Returns:
         (None)
@@ -110,8 +110,8 @@ class HomePage(tk.Frame):
         Create a styled button with consistent hover effects.
 
         Parameters:
-        - text: The text to display on the button.
-        - command: The function to call when the button is clicked.
+        - text: string - The text to display on the button.
+        - command: string - The function to call when the button is clicked.
 
         Returns:
         - A styled Tkinter

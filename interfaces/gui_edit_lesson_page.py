@@ -19,11 +19,11 @@ class EditLessonPage(tk.Frame):
         Constructor for the EditLessonPage class.
 
         Parameters:
-        - master: master widget of this widget instance
-        - course_name: name of the course
-        - lesson_name: name of the lesson
-        - homepage: an instance of the homepage
-        - app_user: an instance of the app user
+        - master: object - master widget of this widget instance
+        - course_name: string - name of the course
+        - lesson_name: string - name of the lesson
+        - homepage: object - an instance of the homepage
+        - app_user: object - an instance of the app user
 
         Returns:
         (None)
@@ -106,19 +106,17 @@ class EditLessonPage(tk.Frame):
 
     def get_lesson_line(self):
         """
-        Reads lessons.txt to find all stored information about the lesson
-
-        Returns a list of strings:
-        - lesson_information[0] = course name
-        - lesson_information[1] = lesson name
-        - lesson_information[2] = lesson text contents
-        - lesson_information[3] = lesson status
+        Reads lessons.txt to find all stored information about the lesson        
 
         Parameters:
         (None)
 
         Returns:
-        - list: A list of lesson information strings
+        - line_information: list; A list of lesson information strings
+            - line_information[0] = course name
+            - line_information[1] = lesson name
+            - line_information[2] = lesson text contents
+            - line_information[3] = lesson status
         """
         with open("data\\lessons.txt", "r", encoding='utf-8') as filer:
             for line in filer.readlines():

@@ -16,9 +16,9 @@ class EmpowerU(tk.Tk):
         Constructor for the EmpowerU class.
 
         Parameter(s):
-        - title: str, title of the window
-        - width: int, width of window in pixels
-        - height: int, height of window in pixels
+        - title: str - title of the window
+        - width: int - width of window in pixels
+        - height: int - height of window in pixels
 
         Returns:
         - None

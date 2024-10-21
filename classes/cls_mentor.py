@@ -18,11 +18,11 @@ class Mentor(User):
     @staticmethod
     def authenticate(input_username, input_password):
         """
-        Method to authenticate a Mentor user.
+        Method to authenticate a Mentor user, used on the login page to let users log in. 
 
         Parameter(s):
-        - input_username: str
-        - input_password: str
+        - input_username: string - the username which the user entered
+        - input_password: string - 
 
         Returns:
         - an instance of Mentor corresponding to the username if successful,
@@ -51,12 +51,12 @@ class Mentor(User):
         Constructor method for the ReceptionistUser class.
 
         Parameters:
-        - uid: unique identifier for the user
-        - first_name: first name of the user
-        - last_name: last name of the user
-        - contact_num: contact number of the user
-        - username: username for the user
-        - password: password for the user
+        - uid: string - unique identifier for the user
+        - first_name: string - first name of the user
+        - last_name: string - last name of the user
+        - contact_num: string - contact number of the user
+        - username: string - username for the user
+        - password: string - password for the user
 
         Returns:
         (None)
