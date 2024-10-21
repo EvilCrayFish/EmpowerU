@@ -21,7 +21,7 @@ def test_read_lessons():
 
     assert courses_page.read_lessons("PY") == ["Hello World!", "Data Types and Variables", "Control Flow", "Functions and Modules"]
 
-    assert courses_page.read_lessons("IS") == ["Intro to Information Systems", "Database Management Systems", "Systems Development Life Cycle", "IS Fundamental"]
+    assert courses_page.read_lessons("IS") == ["Intro to Information Systems", "Database Management Systems", "Systems Development Life Cycle", "IS Fundamentals"]
 
     assert courses_page.read_lessons("") == []
 

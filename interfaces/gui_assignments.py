@@ -112,17 +112,17 @@ class AssignmentsPage(tk.Frame):
         """
         assignments = []
         assignments_dir = f'./data/assignments.txt'
-        with open(assignments_dir, "r") as assignments_txt:
+        with open(assignments_dir, "r", encoding="utf-8") as assignments_txt:
             assignments_lines = assignments_txt.readlines()
             for line in assignments_lines:
-                name, course, status = line.split(",")
+                name,course,status = line.split(",")
                 if name == searched_name:
                     return Assignment(name, course, status)
                 elif course == searched_course or searched_course is None:
                     new_assignment = Assignment(name, course, status)
                     assignments.append(new_assignment)
         return assignments
-
+    
     def redirect_to_assignment(self, assignment):
         """
         Redirect to the assignment page.

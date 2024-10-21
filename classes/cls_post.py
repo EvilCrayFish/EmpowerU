@@ -89,6 +89,38 @@ class Post:
                 code = code_file.read()
 
         return code
+    
+
+    # FOR TESTING
+
+    def __eq__(self, other):
+        if not isinstance(other, Post):
+            return False
+        
+        if self.id != other.id:
+            print(f"ID mismatch: {self.id} != {other.id}")
+        if self.title != other.title:
+            print(f"Title mismatch: {self.title} != {other.title}")
+        if self.user != other.user:
+            print(f"User mismatch: {self.user} != {other.user}")
+        if self.date != other.date:
+            print(f"Date mismatch: {self.date} != {other.date}")
+        if self.time != other.time:
+            print(f"Time mismatch: {self.time} != {other.time}")
+        if self.text != other.text:
+            print(f"Text mismatch: {self.text} != {other.text}")
+        if self.forum != other.forum:
+            print(f"Forum mismatch: {self.forum} != {other.forum}")
+            
+        return (
+            self.id == other.id and 
+            self.title == other.title and 
+            self.user == other.user and 
+            self.date == other.date and 
+            self.time == other.time and 
+            self.text == other.text and 
+            self.forum == other.forum
+        )
 
 # DO NOT MODIFY BEYOND THIS LINE
 if __name__ == "__main__":

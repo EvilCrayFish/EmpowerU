@@ -120,7 +120,7 @@ class EditLessonPage(tk.Frame):
         Returns:
         - list: A list of lesson information strings
         """
-        with open("data\\lessons.txt", "r") as filer:
+        with open("data\\lessons.txt", "r", encoding='utf-8') as filer:
             for line in filer.readlines():
                 line_information = line.strip().split(";")
                 if self.course_name == line_information[0] and self.lesson_name == line_information[1]:

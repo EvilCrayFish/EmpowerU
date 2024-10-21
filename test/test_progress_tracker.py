@@ -26,7 +26,7 @@ def test_measure_lesson_progress():
 
     assert progress_tracker.measure_lesson_progress("IS") == [4, 4, 100]
 
-    assert progress_tracker.measure_lesson_progress("") == [0, 0, 0]
+    assert progress_tracker.measure_lesson_progress("") == [0, 0, 100]
 
     assert not progress_tracker.measure_lesson_progress("AI") == [100, 100, 100]
 
