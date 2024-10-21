@@ -44,7 +44,19 @@ class Mentor(User):
                         return None # or return, or break
         else:
             print(f"Please check subdirectory and file {recept_path} exists.")
-        
+    
+    def import_all_data(self):
+        """
+        Method to read all data by calling methods to read teachers data and students data. This method is still under development and not required for the MVP.
+
+        Parameter(s):
+        (None)
+
+        Returns:
+        (None)
+        """
+        pass
+  
 
     def __init__(self, uid, first_name, last_name, contact_num, username, password):
         """
@@ -65,6 +77,8 @@ class Mentor(User):
         self.username = username
         self.password = password
         self.import_all_data()
+
+
 
 
     
