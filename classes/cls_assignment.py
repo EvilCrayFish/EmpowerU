@@ -17,14 +17,14 @@ class Assignment:
             return False
         
         if self.name != other.name:
-            print(f"Name mismatch: {self.name} != {other.name}")
+            print(f"Name mismatch: {self.name.strip()} != {other.name.strip()}")
         if self.course != other.course:
-            print(f"Course mismatch: {self.course} != {other.course}")
+            print(f"Course mismatch: {self.course.strip()} != {other.course.strip()}")
         if self.status != other.status:
-            print(f"Status mismatch: {self.status} != {other.status}")
+            print(f"Status mismatch: {self.status.strip()} != {other.status.strip()}")
             
         return (
-            self.name == other.name and 
-            self.course == other.course and 
-            self.status == other.status
+            self.name.strip() == other.name.strip() and 
+            self.course.strip() == other.course.strip() and 
+            self.status.strip() == other.status.strip()
             )
